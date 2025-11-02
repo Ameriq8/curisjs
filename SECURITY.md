@@ -18,7 +18,7 @@ We take the security of CurisJS seriously. If you believe you have found a secur
 - Disclose the vulnerability publicly before it has been addressed
 
 ### Please DO:
-1. **Email:** Send details to [your-email@example.com] (replace with your actual email)
+1. **Email:** Send details to amer.mo2377@outlook.com
 2. **Include:**
    - Description of the vulnerability
    - Steps to reproduce
