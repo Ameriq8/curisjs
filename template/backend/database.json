@@ -1,0 +1,55 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "Learn CurisJS",
+      "description": "Study the CurisJS framework documentation",
+      "completed": false,
+      "created_at": "2025-11-02T19:38:19.932Z",
+      "updated_at": "2025-11-02T19:38:19.932Z"
+    },
+    {
+      "id": 2,
+      "title": "Learn CurisJS",
+      "description": "Study the CurisJS framework documentation",
+      "completed": false,
+      "created_at": "2025-11-02T19:38:46.398Z",
+      "updated_at": "2025-11-02T19:38:46.398Z"
+    },
+    {
+      "id": 3,
+      "title": "Learn CurisJS",
+      "description": "Study the CurisJS framework documentation",
+      "completed": false,
+      "created_at": "2025-11-02T19:39:00.666Z",
+      "updated_at": "2025-11-02T19:39:00.666Z"
+    },
+    {
+      "id": 4,
+      "title": "Learn CurisJS",
+      "description": "Study the CurisJS framework documentation",
+      "completed": false,
+      "created_at": "2025-11-02T19:39:01.645Z",
+      "updated_at": "2025-11-02T19:39:01.645Z"
+    },
+    {
+      "id": 5,
+      "title": "Learn CurisJS",
+      "description": "Study the CurisJS framework documentation",
+      "completed": false,
+      "created_at": "2025-11-02T19:39:02.212Z",
+      "updated_at": "2025-11-02T19:39:02.212Z"
+    },
+    {
+      "id": 6,
+      "title": "Learn CurisJS",
+      "description": "Study the CurisJS framework documentation",
+      "completed": false,
+      "created_at": "2025-11-02T19:39:03.978Z",
+      "updated_at": "2025-11-02T19:39:03.978Z"
+    }
+  ],
+  "_meta": {
+    "nextId": 7
+  }
+}

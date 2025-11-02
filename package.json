@@ -1,0 +1,54 @@
+{
+  "name": "@curisjs/monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "High-performance, multi-runtime web framework and tools",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm --filter \"./packages/**\" build",
+    "dev": "pnpm --filter \"./packages/**\" dev",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "pnpm --filter \"./packages/**\" clean && rm -rf node_modules",
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.{js,ts,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,json,md}\"",
+    "typecheck": "pnpm --filter \"./packages/**\" typecheck",
+    "curis": "node packages/cli/dist/index.js"
+  },
+  "keywords": [
+    "framework",
+    "typescript",
+    "http",
+    "web",
+    "multi-runtime"
+  ],
+  "author": "Ameriq8 <https://github.com/Ameriq8>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ameriq8/curisjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ameriq8/curisjs/issues"
+  },
+  "homepage": "https://github.com/Ameriq8/curisjs#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@types/eslint": "^9.6.1",
+    "@types/node": "^20.10.0",
+    "@vitest/coverage-v8": "^4.0.6",
+    "eslint": "^9.39.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^8.46.2",
+    "vitest": "^4.0.6"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

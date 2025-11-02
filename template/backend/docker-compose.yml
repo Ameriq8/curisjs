@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_PATH=/var/lib/app/database.sqlite
+    volumes:
+      - ./data:/var/lib/app
+    restart: unless-stopped

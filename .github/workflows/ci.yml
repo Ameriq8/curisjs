@@ -1,0 +1,186 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  # Test across multiple Node.js versions
+  test-node:
+    name: Test on Node.js ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+        working-directory: packages/core
+
+      - name: Run tests
+        run: pnpm test
+        working-directory: packages/core
+
+      - name: Coverage
+        if: matrix.node-version == '20.x'
+        run: pnpm test:coverage
+        working-directory: packages/core
+
+  # Test on Bun
+  test-bun:
+    name: Test on Bun
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: pnpm install
+        working-directory: packages/core
+
+      - name: Build
+        run: pnpm build
+        working-directory: packages/core
+
+      - name: Run tests
+        run: bun test
+        working-directory: packages/core
+
+  # Test on Deno
+  test-deno:
+    name: Test on Deno
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Check TypeScript
+        run: deno check packages/core/src/**/*.ts
+
+      # Deno tests will be added when Deno adapter is complete
+
+  # Lint and type check
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm lint || echo "Lint not configured yet"
+
+      - name: Type check
+        run: pnpm typecheck
+
+  # Performance regression test
+  benchmark:
+    name: Performance Regression Check
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+        working-directory: packages/framework
+
+      # TODO: Add actual benchmark comparison
+      - name: Run benchmarks
+        run: echo "Benchmark infrastructure coming soon"
+        working-directory: packages/core
+
+  # Cross-runtime integration test
+  integration:
+    name: Cross-Runtime Integration
+    runs-on: ubuntu-latest
+    needs: [test-node, test-bun]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'pnpm'
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build all
+        run: pnpm build
+
+      - name: Integration tests
+        run: echo "Cross-runtime integration tests coming soon"

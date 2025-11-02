@@ -1,0 +1,66 @@
+{
+  "name": "@curisjs/core",
+  "version": "0.1.0",
+  "description": "High-performance web framework for Node.js built on Web Standards",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./node": {
+      "types": "./dist/adapters/node.d.ts",
+      "import": "./dist/adapters/node.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run clean && pnpm run build"
+  },
+  "keywords": [
+    "framework",
+    "web",
+    "http",
+    "server",
+    "nodejs",
+    "node",
+    "performance",
+    "typescript",
+    "web-standards",
+    "router",
+    "middleware"
+  ],
+  "author": "Ameriq8 <https://github.com/Ameriq8>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ameriq8/curisjs.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/Ameriq8/curisjs/issues"
+  },
+  "homepage": "https://github.com/Ameriq8/curisjs/tree/main/packages/core#readme",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}

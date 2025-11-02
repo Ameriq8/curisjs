@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/Ameriq8/curisjs/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📖 Documentation
+    url: https://github.com/Ameriq8/curisjs/tree/main/docs
+    about: Read the official CurisJS documentation
+  - name: 💡 Stack Overflow
+    url: https://stackoverflow.com/questions/tagged/curisjs
+    about: Ask questions on Stack Overflow with the 'curisjs' tag

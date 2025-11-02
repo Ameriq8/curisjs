@@ -1,0 +1,19 @@
+# Build outputs
+dist/
+build/
+coverage/
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Lock files
+pnpm-lock.yaml
+bun.lock
+package-lock.json
+yarn.lock
+
+# Generated files
+*.d.ts
+*.js.map
+*.d.ts.map
