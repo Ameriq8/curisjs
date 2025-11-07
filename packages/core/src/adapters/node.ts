@@ -2,6 +2,25 @@
  * Node.js Adapter
  * Maps Node's http.IncomingMessage → Web Standard Request
  * and Web Standard Response → http.ServerResponse
+ *
+ * This adapter is primarily for:
+ * 1. Node.js versions < 18 (no native fetch/Request/Response)
+ * 2. Advanced use cases requiring direct http module access
+ * 3. Custom server configurations
+ *
+ * For Node.js 18+, you can use app.listen() directly without this adapter.
+ *
+ * @example
+ * ```ts
+ * // For Node.js < 18 or advanced use cases
+ * import { createApp } from '@curisjs/core';
+ * import { serve } from '@curisjs/core/adapters/node';
+ *
+ * const app = createApp();
+ * app.get('/', () => new Response('Hello'));
+ *
+ * serve(app, { port: 3000 });
+ * ```
  */
 
 import type { Server, IncomingMessage, ServerResponse } from 'http';

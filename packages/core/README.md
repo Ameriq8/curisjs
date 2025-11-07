@@ -7,8 +7,8 @@ High-performance, multi-runtime web framework built on Web Standards.
 CurisJS is designed to be:
 
 - **Fast**: Optimized radix/trie router, minimal allocations, zero-copy streaming
-- **Portable**: Runs on Node.js, Bun, Deno, Cloudflare Workers, Vercel Edge
-- **Standards-first**: Built on Web Standard Request/Response APIs
+- **Portable**: Runs on Node.js 18+, Bun, Deno, Cloudflare Workers, Vercel Edge - **without any adapters**
+- **Standards-first**: Built entirely on Web Standard Request/Response APIs
 - **Production-ready**: Type-safe, well-tested, predictable performance
 
 ## Architecture
@@ -17,76 +17,63 @@ CurisJS is designed to be:
 Core Kernel (kernel.ts)
     ├─ Router (radix/trie)
     ├─ Context (minimal state container)
-    └─ Middleware chain (short-circuit support)
+    ├─ Middleware chain (short-circuit support)
+    └─ Runtime Detection (auto-detect Bun/Deno/Node)
 
-Runtime Adapters
-    ├─ Node.js (http.createServer)
-    ├─ Bun (Bun.serve)
-    ├─ Deno (Deno.serve)
-    └─ Edge (FetchEvent API)
+Web Standards API
+    ├─ Request (standard)
+    ├─ Response (standard)
+    ├─ Headers (standard)
+    └─ FormData (standard)
 ```
 
 ## Quick Start
 
-### Node.js
+### Universal Example (Works on All Runtimes)
 
-```javascript
-// examples/simple-server.js
-import { createApp } from '@curisjs/framework';
-import { serve } from '@curisjs/framework/node';
+```typescript
+import { createApp, json } from '@curisjs/core';
 
 const app = createApp();
 
-app.get('/', () => new Response('Hello World!'));
+app.get('/', (ctx) => {
+  return json({ message: 'Hello World!' });
+});
 
 app.get('/users/:id', (ctx) => {
-  return Response.json({
-    userId: ctx.params.id,
-  });
+  return json({ userId: ctx.params.id });
 });
 
-await serve(app, { port: 3333 });
+// Auto-detects runtime and starts server
+app.listen(3000);
 ```
 
-**Run the example:**
+**Run on any runtime:**
 
 ```bash
-cd packages/framework
-pnpm build
-node examples/simple-server.js
+# Bun
+bun run server.ts
+
+# Deno
+deno run --allow-net server.ts
+
+# Node.js 18+
+npx tsx server.ts
 ```
 
-Visit: http://localhost:3333
-
-### Bun
+### Cloudflare Workers / Vercel Edge
 
 ```typescript
-import { createApp } from '@curisjs/framework';
+import { createApp, createHandler, json } from '@curisjs/core';
 
 const app = createApp();
 
 app.get('/', (ctx) => {
-  return new Response('Hello from Bun!');
+  return json({ message: 'Hello from the Edge!' });
 });
 
-export default {
-  port: 3000,
-  fetch: app.fetch.bind(app),
-};
-```
-
-### Deno
-
-```typescript
-import { createApp } from '@curisjs/framework';
-
-const app = createApp();
-
-app.get('/', (ctx) => {
-  return new Response('Hello from Deno!');
-});
-
-Deno.serve({ port: 3000 }, app.fetch.bind(app));
+// Export for edge runtime
+export default createHandler(app);
 ```
 
 ## Features

@@ -2,31 +2,73 @@
 
 A production-ready backend API template built with **CurisJS**, featuring a complete Todo CRUD application with clean architecture, type safety, and modern best practices.
 
+**Runtime Agnostic**: Same code runs on Bun, Deno, and Node.js 18+ without any modifications!
+
 ## ✨ Features
 
-- **🏗️ Clean Architecture**: Controller → Service → Repository pattern
+- **� Runtime Agnostic**: Works on Bun, Deno, Node.js 18+ - write once, run anywhere
+- **�🏗️ Clean Architecture**: Controller → Service → Repository pattern
 - **🛡️ Type Safety**: Full TypeScript with strict mode
-- **📦 Complete CRUD**: Todo List API with SQLite database
+- **📦 Complete CRUD**: Todo List API with in-memory database
 - **✅ Validation**: Built-in Zod-like schema validation
-- **🔧 Development Ready**: Hot reload with `tsx watch`
+- **🔧 Development Ready**: Hot reload with `tsx watch` or native runtime watch
 - **🚀 Production Ready**: Error handling, CORS, logging, timing
 - **📊 RESTful API**: Proper HTTP methods and status codes
 - **🎯 Query Filters**: Pagination, search, and filtering support
+- **🔌 DB Ready**: Prepared for @curisjs/db integration
 
 ## 📋 Prerequisites
 
-- Node.js 18+ or Bun
-- pnpm (recommended) or npm
+Choose your runtime (all supported!):
+
+- **Bun** (Recommended - Fastest): [Install Bun](https://bun.sh)
+- **Deno**: [Install Deno](https://deno.land)
+- **Node.js 18+**: [Install Node.js](https://nodejs.org)
 
 ## 🚀 Quick Start
 
-### 1. Install Dependencies
+### Using Bun (Recommended)
 
 ```bash
-pnpm install
+# Install dependencies
+bun install
+
+# Development
+bun run dev:bun
+
+# Production
+bun run build
+bun run start:bun
 ```
 
-### 2. Setup Environment
+### Using Deno
+
+```bash
+# No install needed! Run directly
+deno run --allow-net --allow-read --allow-env --watch src/index.ts
+
+# Or use the npm script
+bun install  # Only for TypeScript definitions
+bun run dev:deno
+```
+
+### Using Node.js 18+
+
+```bash
+# Install dependencies
+npm install
+# or
+pnpm install
+
+# Development
+npm run dev
+
+# Production
+npm run build
+npm start
+```
+
+### 2. Setup Environment (Optional)
 
 ```bash
 cp .env.example .env

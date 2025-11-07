@@ -1,10 +1,10 @@
 /**
  * CurisJS Backend API
  * Production-ready backend template with Todo CRUD example
+ * Runtime-agnostic: Works on Bun, Deno, Node.js 18+
  */
 
 import { createApp, cors, logger } from '@curisjs/core';
-import { serve } from '@curisjs/core/node';
 import { initializeDatabase, closeDatabase } from './database/connection.js';
 import { registerRoutes } from './routes/index.js';
 import { errorHandler } from './middleware/errorHandler.js';
@@ -31,14 +31,12 @@ app.use(
 // Register all routes
 registerRoutes(app);
 
-// Start server
+// Start server (runtime-agnostic - auto-detects Bun, Deno, Node.js)
 const port = parseInt(process.env.PORT || '3001', 10);
 
-serve(app, {
-  port,
-  onListen: (port: number, hostname: string) => {
-    console.log(`
-🚀 Server running on http://${hostname}:${port}
+app.listen(port, (p) => {
+  console.log(`
+🚀 Server running on http://localhost:${p}
 
 📚 API Endpoints:
    GET    /health              - Health check
@@ -51,18 +49,14 @@ serve(app, {
 
 🔧 Environment: ${process.env.NODE_ENV || 'development'}
 `);
-  },
 });
 
 // Graceful shutdown
-process.on('SIGINT', async () => {
+const shutdown = async () => {
   console.log('\n👋 Shutting down gracefully...');
   closeDatabase();
   process.exit(0);
-});
+};
 
-process.on('SIGTERM', async () => {
-  console.log('\n👋 Shutting down gracefully...');
-  closeDatabase();
-  process.exit(0);
-});
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);

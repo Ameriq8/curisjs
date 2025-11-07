@@ -142,4 +142,7 @@ export interface App {
 
   /** Handle incoming request (main entry point) */
   fetch(request: Request, env?: Environment): Promise<Response>;
+
+  /** Start server (runtime agnostic) - for Bun, Deno, Node.js 18+ */
+  listen(port?: number, callback?: (port: number) => void): Promise<void>;
 }
