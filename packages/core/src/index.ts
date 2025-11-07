@@ -10,6 +10,26 @@ export { createApp, CurisApp } from './kernel.js';
 export { Router } from './router.js';
 export { ContextImpl, ValidationError } from './context.js';
 
+/**
+ * Create handler for edge runtimes (Cloudflare Workers, Vercel Edge, etc.)
+ * @example
+ * ```ts
+ * // worker.ts
+ * import { createApp, createHandler } from '@curisjs/core';
+ *
+ * const app = createApp();
+ * app.get('/', (ctx) => new Response('Hello World'));
+ *
+ * export default createHandler(app);
+ * ```
+ */
+export function createHandler(app: import('./types/index.js').App) {
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    fetch: (request: Request, env?: any) => app.fetch(request, env),
+  };
+}
+
 // Validation exports (Zod-like schema validation)
 export {
   z,

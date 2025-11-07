@@ -1,7 +1,7 @@
 {
   "name": "@curisjs/core",
   "version": "0.1.0",
-  "description": "High-performance web framework for Node.js built on Web Standards",
+  "description": "High-performance, multi-runtime web framework built on Web Standards. Works with Bun, Deno, Node.js 18+, and edge runtimes.",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -12,7 +12,7 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
-    "./node": {
+    "./adapters/node": {
       "types": "./dist/adapters/node.d.ts",
       "import": "./dist/adapters/node.js"
     }
@@ -36,6 +36,11 @@
     "server",
     "nodejs",
     "node",
+    "bun",
+    "deno",
+    "cloudflare-workers",
+    "edge",
+    "multi-runtime",
     "performance",
     "typescript",
     "web-standards",

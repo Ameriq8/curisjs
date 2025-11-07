@@ -185,8 +185,8 @@ export class CurisApp implements App {
    * Add route to router
    */
   private addRoute(method: HTTPMethod, path: string, handler: Handler): App {
-    const fullPath = this.config.basePath + path;
-    this.router.add(method, fullPath, handler);
+    // Don't prepend basePath - it's stripped during matching
+    this.router.add(method, path, handler);
     return this;
   }
 
@@ -208,6 +208,102 @@ export class CurisApp implements App {
     return new Response('Internal Server Error', {
       status: 500,
       headers: { 'Content-Type': 'text/plain' },
+    });
+  }
+
+  /**
+   * Detect the current runtime environment
+   */
+  private detectRuntime(): 'bun' | 'deno' | 'node' | 'worker' {
+    // @ts-expect-error - Bun global
+    if (typeof Bun !== 'undefined') return 'bun';
+    // @ts-expect-error - Deno global
+    if (typeof Deno !== 'undefined') return 'deno';
+    if (typeof process !== 'undefined' && process.versions?.node) return 'node';
+    return 'worker';
+  }
+
+  /**
+   * Start server - Runtime agnostic
+   * Automatically detects runtime and uses appropriate server
+   */
+  async listen(port: number = 3000, callback?: (port: number) => void): Promise<void> {
+    const runtime = this.detectRuntime();
+
+    switch (runtime) {
+      case 'bun':
+        return this.listenBun(port, callback);
+      case 'deno':
+        return this.listenDeno(port, callback);
+      case 'node':
+        return this.listenNode(port, callback);
+      default:
+        throw new Error(
+          `Cannot start server in '${runtime}' runtime. Use the fetch() method directly or deploy to an edge platform.`
+        );
+    }
+  }
+
+  /**
+   * Start Bun server
+   */
+  private async listenBun(port: number, callback?: (port: number) => void): Promise<void> {
+    // @ts-expect-error - Bun global
+    const server = Bun.serve({
+      port,
+      fetch: (req: Request) => this.fetch(req),
+    });
+
+    if (callback) {
+      callback(port);
+    } else {
+      console.log(`🚀 Server running on http://localhost:${port} (Bun)`);
+    }
+
+    // Keep process alive
+    await new Promise(() => {
+      // Bun handles this automatically
+    });
+  }
+
+  /**
+   * Start Deno server
+   */
+  private async listenDeno(port: number, callback?: (port: number) => void): Promise<void> {
+    // @ts-expect-error - Deno global
+    Deno.serve(
+      {
+        port,
+        onListen: () => {
+          if (callback) {
+            callback(port);
+          } else {
+            console.log(`🚀 Server running on http://localhost:${port} (Deno)`);
+          }
+        },
+      },
+      (req: Request) => this.fetch(req)
+    );
+  }
+
+  /**
+   * Start Node.js server (requires Node 18+)
+   */
+  private async listenNode(port: number, callback?: (port: number) => void): Promise<void> {
+    // Check for native fetch support (Node 18+)
+    if (typeof globalThis.fetch === 'undefined') {
+      throw new Error(
+        'Node.js 18+ is required. For older versions, use the node adapter: import { serve } from "@curisjs/core/adapters/node"'
+      );
+    }
+
+    // Use the adapter for Node.js
+    const { serve } = await import('./adapters/node.js');
+    await serve(this, {
+      port,
+      onListen: callback
+        ? (p: number) => callback(p)
+        : (p: number, h: string) => console.log(`🚀 Server running on http://${h}:${p} (Node.js)`),
     });
   }
 }

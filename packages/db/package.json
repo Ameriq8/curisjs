@@ -1,0 +1,83 @@
+{
+  "name": "@curisjs/db",
+  "version": "0.1.0",
+  "description": "Type-safe ORM for CurisJS framework built on Knex.js - Runtime Agnostic (Bun, Deno, Node.js)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./providers": {
+      "types": "./dist/providers/index.d.ts",
+      "import": "./dist/providers/index.js"
+    },
+    "./middleware": {
+      "types": "./dist/middleware/index.d.ts",
+      "import": "./dist/middleware/index.js"
+    }
+  },
+  "bin": {
+    "curisdb": "./dist/bin/curisdb.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run clean && pnpm run build"
+  },
+  "keywords": [
+    "curisjs",
+    "orm",
+    "database",
+    "sql",
+    "knex",
+    "typescript",
+    "bun",
+    "deno",
+    "runtime-agnostic",
+    "migrations",
+    "query-builder"
+  ],
+  "author": "Ameriq8 <https://github.com/Ameriq8>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ameriq8/curisjs.git",
+    "directory": "packages/db"
+  },
+  "bugs": {
+    "url": "https://github.com/Ameriq8/curisjs/issues"
+  },
+  "homepage": "https://github.com/Ameriq8/curisjs/tree/main/packages/db#readme",
+  "peerDependencies": {
+    "@curisjs/core": "workspace:*"
+  },
+  "dependencies": {
+    "knex": "^3.1.0"
+  },
+  "optionalDependencies": {
+    "better-sqlite3": "^11.0.0",
+    "pg": "^8.11.0",
+    "mysql2": "^3.9.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.9",
+    "@types/node": "^20.10.0",
+    "@types/pg": "^8.11.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

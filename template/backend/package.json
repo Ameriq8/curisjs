@@ -1,12 +1,16 @@
 {
   "name": "curisjs-backend-template",
   "version": "1.0.0",
-  "description": "Production-ready CurisJS backend API template with Todo CRUD example",
+  "description": "Production-ready CurisJS backend API template with Todo CRUD example - Runtime Agnostic (Bun, Deno, Node.js)",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
+    "dev:bun": "bun --watch src/index.ts",
+    "dev:deno": "deno run --allow-net --allow-read --allow-env --watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
+    "start:bun": "bun run dist/index.js",
+    "start:deno": "deno run --allow-net --allow-read --allow-env dist/index.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts",
     "format": "prettier --write \"src/**/*.ts\"",
@@ -17,7 +21,10 @@
     "backend",
     "api",
     "rest",
-    "typescript"
+    "typescript",
+    "bun",
+    "deno",
+    "runtime-agnostic"
   ],
   "author": "",
   "license": "MIT",

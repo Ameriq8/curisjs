@@ -3,22 +3,17 @@
  */
 
 import type { App } from '@curisjs/core';
+import { json } from '@curisjs/core';
 import { registerTodoRoutes } from './todos.js';
 
 export function registerRoutes(app: App): void {
   // Health check endpoint
   app.get('/health', () => {
-    return new Response(
-      JSON.stringify({
-        success: true,
-        message: 'API is running',
-        timestamp: new Date().toISOString(),
-      }),
-      {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return json({
+      success: true,
+      message: 'API is running',
+      timestamp: new Date().toISOString(),
+    });
   });
 
   // API routes
@@ -26,15 +21,12 @@ export function registerRoutes(app: App): void {
 
   // 404 handler
   app.all('*', () => {
-    return new Response(
-      JSON.stringify({
+    return json(
+      {
         success: false,
         error: 'Route not found',
-      }),
-      {
-        status: 404,
-        headers: { 'Content-Type': 'application/json' },
-      }
+      },
+      { status: 404 }
     );
   });
 }
