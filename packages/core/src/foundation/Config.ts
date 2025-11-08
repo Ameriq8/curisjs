@@ -3,15 +3,13 @@
  * Manages application configuration with dot notation access
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 export class Config {
-  private items: Map<string, any> = new Map();
+  private items: Map<string, unknown> = new Map();
 
   /**
    * Set a configuration value
    */
-  set(key: string, value: any): void {
+  set(key: string, value: unknown): void {
     const keys = key.split('.');
 
     if (keys.length === 1) {

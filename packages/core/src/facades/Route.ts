@@ -3,8 +3,6 @@
  * Provides static-like access to the router
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Facade } from '../foundation/Facade';
 
 class RouteFacade extends Facade {

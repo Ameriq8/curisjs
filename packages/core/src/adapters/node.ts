@@ -88,7 +88,6 @@ export async function serve(app: App, options: NodeServerOptions = {}): Promise<
  * Minimizes copying and allocations
  */
 async function nodeRequestToWebRequest(req: IncomingMessage): Promise<Request> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const protocol = (req.socket as any).encrypted ? 'https' : 'http';
   const host = req.headers.host || 'localhost';
   const url = `${protocol}://${host}${req.url}`;

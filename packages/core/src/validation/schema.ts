@@ -3,8 +3,6 @@
  * Provides a fluent, type-safe validation API
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 export interface ValidationIssue {
   path: (string | number)[];
   message: string;

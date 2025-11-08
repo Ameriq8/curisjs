@@ -106,8 +106,7 @@ export class Application {
    * Bind a service to the container
    */
   bind(abstract: string | symbol, concrete?: unknown, singleton = false): this {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.container.bind(abstract, concrete as any, singleton);
+    this.container.bind(abstract, concrete as never, singleton);
     return this;
   }
 
@@ -115,8 +114,7 @@ export class Application {
    * Bind a singleton service
    */
   singleton(abstract: string | symbol, concrete?: unknown): this {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.container.singleton(abstract, concrete as any);
+    this.container.singleton(abstract, concrete as never);
     return this;
   }
 

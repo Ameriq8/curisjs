@@ -3,16 +3,14 @@
  * Provides dependency injection, service binding, and automatic resolution
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-export type Constructor<T = any> = new (...args: any[]) => T;
-export type Factory<T = any> = (container: Container) => T;
-export type Binding<T = any> = Constructor<T> | Factory<T>;
+export type Constructor<T = unknown> = new (...args: unknown[]) => T;
+export type Factory<T = unknown> = (container: Container) => T;
+export type Binding<T = unknown> = Constructor<T> | Factory<T>;
 
 interface ServiceBinding {
   binding: Binding;
   singleton: boolean;
-  instance?: any;
+  instance?: unknown;
 }
 
 export class Container {
@@ -78,7 +76,7 @@ export class Container {
 
     // Return singleton instance if already resolved
     if (binding.singleton && binding.instance !== undefined) {
-      return binding.instance;
+      return binding.instance as T;
     }
 
     // Build the instance
@@ -90,7 +88,7 @@ export class Container {
       this.resolvedSet.add(key);
     }
 
-    return instance;
+    return instance as T;
   }
 
   /**

@@ -3,8 +3,6 @@
  * Provides static-like access to configuration
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Facade } from '../foundation/Facade';
 import type { Config as ConfigClass } from '../foundation/Config';
 
