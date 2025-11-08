@@ -2,7 +2,7 @@
  * Database migration commands
  */
 
-import { loadDatabaseConfig, success, error as showError, info } from '../../utils';
+import { loadDatabaseConfig, success, error as showError, info } from '../../utils.js';
 
 export async function runMigrateCommand(subcommand: string | undefined, args: string[]) {
   switch (subcommand) {
@@ -33,7 +33,7 @@ async function migrate(args: string[]) {
     const { createDatabase } = await import('@curisjs/db');
     const { createMigrationRunner } = await import('@curisjs/db');
 
-    const { loadDatabaseConfig } = await import('../../utils');
+    const { loadDatabaseConfig } = await import('../../utils.js');
 
     const stepIndex = args.indexOf('--step');
     const stepArg = stepIndex !== -1 ? args[stepIndex + 1] : undefined;

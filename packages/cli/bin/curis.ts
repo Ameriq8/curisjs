@@ -26,100 +26,100 @@ async function main() {
     switch (command) {
       // Project scaffolding
       case 'new': {
-        const { runNewCommand } = await import('../dist/commands/new');
-        await runNewCommand(args.slice(1));
+        const { runNewCommand } = await import('../src/commands/new.js');
+        await runNewCommand(args[1]);
         break;
       }
 
       // Database commands
       case 'db:migrate': {
-        const { runMigrateCommand } = await import('../dist/commands/db/migrate');
+        const { runMigrateCommand } = await import('../src/commands/db/migrate.js');
         await runMigrateCommand(subcommand, args.slice(2));
         break;
       }
 
       case 'db:seed': {
-        const { runSeedCommand } = await import('../dist/commands/db/seed');
+        const { runSeedCommand } = await import('../src/commands/db/seed.js');
         await runSeedCommand(subcommand, args.slice(2));
         break;
       }
 
       case 'db:rollback': {
-        const { runRollbackCommand } = await import('../dist/commands/db/migrate');
+        const { runRollbackCommand } = await import('../src/commands/db/migrate.js');
         await runRollbackCommand(args.slice(1));
         break;
       }
 
       case 'db:reset': {
-        const { runResetCommand } = await import('../dist/commands/db/migrate');
+        const { runResetCommand } = await import('../src/commands/db/migrate.js');
         await runResetCommand();
         break;
       }
 
       case 'db:status': {
-        const { runStatusCommand } = await import('../dist/commands/db/migrate');
+        const { runStatusCommand } = await import('../src/commands/db/migrate.js');
         await runStatusCommand();
         break;
       }
 
       case 'db:wipe': {
-        const { runWipeCommand } = await import('../dist/commands/db/utils');
+        const { runWipeCommand } = await import('../src/commands/db/utils.js');
         await runWipeCommand();
         break;
       }
 
       // Code generators
       case 'make:migration': {
-        const { runMakeMigration } = await import('../dist/commands/make/migration');
+        const { runMakeMigration } = await import('../src/commands/make/migration.js');
         await runMakeMigration(args.slice(1));
         break;
       }
 
       case 'make:model': {
-        const { runMakeModel } = await import('../dist/commands/make/model');
+        const { runMakeModel } = await import('../src/commands/make/model.js');
         await runMakeModel(args.slice(1));
         break;
       }
 
       case 'make:controller': {
-        const { runMakeController } = await import('../dist/commands/make/controller');
+        const { runMakeController } = await import('../src/commands/make/controller.js');
         await runMakeController(args.slice(1));
         break;
       }
 
       case 'make:service': {
-        const { runMakeService } = await import('../dist/commands/make/service');
+        const { runMakeService } = await import('../src/commands/make/service.js');
         await runMakeService(args.slice(1));
         break;
       }
 
       case 'make:middleware': {
-        const { runMakeMiddleware } = await import('../dist/commands/make/middleware');
+        const { runMakeMiddleware } = await import('../src/commands/make/middleware.js');
         await runMakeMiddleware(args.slice(1));
         break;
       }
 
       case 'make:seeder': {
-        const { runMakeSeeder } = await import('../dist/commands/make/seeder');
+        const { runMakeSeeder } = await import('../src/commands/make/seeder.js');
         await runMakeSeeder(args.slice(1));
         break;
       }
 
       case 'make:validator': {
-        const { runMakeValidator } = await import('../dist/commands/make/validator');
+        const { runMakeValidator } = await import('../src/commands/make/validator.js');
         await runMakeValidator(args.slice(1));
         break;
       }
 
       // Development server
       case 'dev': {
-        const { runDevCommand } = await import('../dist/commands/dev');
+        const { runDevCommand } = await import('../src/commands/dev.js');
         await runDevCommand(args.slice(1));
         break;
       }
 
       case 'build': {
-        const { runBuildCommand } = await import('../dist/commands/build');
+        const { runBuildCommand } = await import('../src/commands/build.js');
         await runBuildCommand(args.slice(1));
         break;
       }

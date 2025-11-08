@@ -10,7 +10,7 @@ import {
   getTimestamp,
   writeFile,
   getProjectRoot,
-} from '../../utils';
+} from '../../utils.js';
 
 export async function runMakeSeeder(args: string[]) {
   const name = args[0];

@@ -3,7 +3,13 @@
  */
 
 import { join } from 'node:path';
-import { success, error as showError, toCamelCase, writeFile, getProjectRoot } from '../../utils';
+import {
+  success,
+  error as showError,
+  toCamelCase,
+  writeFile,
+  getProjectRoot,
+} from '../../utils.js';
 
 export async function runMakeMiddleware(args: string[]) {
   const name = args[0];

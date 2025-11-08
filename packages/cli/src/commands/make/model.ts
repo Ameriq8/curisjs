@@ -11,7 +11,7 @@ import {
   pluralize,
   writeFile,
   getProjectRoot,
-} from '../../utils';
+} from '../../utils.js';
 
 export async function runMakeModel(args: string[]) {
   const name = args[0];

@@ -2,12 +2,12 @@
  * Database utility commands
  */
 
-import { success, error as showError, warn, info } from '../../utils';
+import { success, error as showError, warn, info } from '../../utils.js';
 
 export async function runWipeCommand() {
   try {
     const { createDatabase } = await import('@curisjs/db');
-    const { loadDatabaseConfig } = await import('../../utils');
+    const { loadDatabaseConfig } = await import('../../utils.js');
 
     warn('This will drop all tables!');
     info('Wiping database...');

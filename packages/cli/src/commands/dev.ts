@@ -2,7 +2,7 @@
  * Dev server command
  */
 
-import { info } from '../utils';
+import { info } from '../utils.js';
 
 export async function runDevCommand(_args: string[]) {
   info('Development server command');

@@ -2,7 +2,7 @@
  * Database seed commands
  */
 
-import { loadDatabaseConfig, success, error as showError, info } from '../../utils';
+import { loadDatabaseConfig, success, error as showError, info } from '../../utils.js';
 
 export async function runSeedCommand(subcommand: string | undefined, _args: string[]) {
   if (subcommand) {

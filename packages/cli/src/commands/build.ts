@@ -2,7 +2,7 @@
  * Build command
  */
 
-import { info } from '../utils';
+import { info } from '../utils.js';
 
 export async function runBuildCommand(_args: string[]) {
   info('Build command');

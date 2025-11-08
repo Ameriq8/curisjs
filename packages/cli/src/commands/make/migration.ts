@@ -2,7 +2,7 @@
  * Make migration command
  */
 
-import { success, error as showError } from '../../utils';
+import { success, error as showError } from '../../utils.js';
 
 export async function runMakeMigration(args: string[]) {
   const name = args[0];
@@ -15,7 +15,7 @@ export async function runMakeMigration(args: string[]) {
 
   try {
     const { createMigrationGenerator } = await import('@curisjs/db');
-    const { loadDatabaseConfig } = await import('../../utils');
+    const { loadDatabaseConfig } = await import('../../utils.js');
 
     const config = await loadDatabaseConfig();
     const generator = createMigrationGenerator(config.migrations as never);
