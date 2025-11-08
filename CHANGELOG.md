@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### 🚧 In Progress
+
 - Bun runtime adapter
 - Deno runtime adapter
 - Edge runtime adapter
@@ -18,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🎉 Initial Release
 
 #### ✨ Added
+
 - **Core Framework**
   - High-performance radix/trie router with O(path_length) complexity
   - Context API for request/response handling
@@ -87,6 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Code of conduct
 
 #### 🏗️ Architecture
+
 - Monorepo structure with pnpm workspaces
 - Modular package design
 - Runtime adapter pattern
@@ -94,15 +97,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Zero-allocation hot paths
 
 #### 📦 Packages
+
 - `@curisjs/core` - Core framework package
 
 ### 🔒 Security
+
 - Input validation system
 - CORS configuration
 - Error handling without information leakage
 - Security best practices documentation
 
 ### 📚 Examples
+
 - Simple HTTP server
 - REST API with CRUD operations
 - Middleware examples

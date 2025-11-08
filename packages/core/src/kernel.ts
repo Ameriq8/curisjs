@@ -249,7 +249,7 @@ export class CurisApp implements App {
    */
   private async listenBun(port: number, callback?: (port: number) => void): Promise<void> {
     // @ts-expect-error - Bun global
-    const server = Bun.serve({
+    Bun.serve({
       port,
       fetch: (req: Request) => this.fetch(req),
     });
@@ -298,7 +298,7 @@ export class CurisApp implements App {
     }
 
     // Use the adapter for Node.js
-    const { serve } = await import('./adapters/node.js');
+    const { serve } = await import('./adapters/node');
     await serve(this, {
       port,
       onListen: callback

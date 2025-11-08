@@ -1,0 +1,72 @@
+{
+  "name": "@curisjs/cli",
+  "version": "0.1.0",
+  "description": "CLI for CurisJS framework - Generate code, manage database, scaffold projects",
+  "type": "module",
+  "bin": {
+    "curis": "./dist/bin/curis.js"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run clean && pnpm run build"
+  },
+  "keywords": [
+    "curisjs",
+    "cli",
+    "generator",
+    "scaffold",
+    "database",
+    "orm",
+    "migration",
+    "typescript",
+    "framework"
+  ],
+  "author": "Ameriq8 <https://github.com/Ameriq8>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ameriq8/curisjs.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/Ameriq8/curisjs/issues"
+  },
+  "homepage": "https://github.com/Ameriq8/curisjs/tree/main/packages/cli#readme",
+  "dependencies": {
+    "picocolors": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@curisjs/core": "workspace:*",
+    "@curisjs/db": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "@curisjs/db": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

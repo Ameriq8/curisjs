@@ -22,14 +22,14 @@ The entire framework is built on standard Web APIs:
 ```typescript
 // Standard Request object
 interface Context {
-  request: Request;  // ✅ Web Standard
+  request: Request; // ✅ Web Standard
   params: Record<string, string>;
   env: Record<string, unknown>;
 }
 
 // Standard Response
 app.get('/', (ctx) => {
-  return new Response('Hello');  // ✅ Web Standard
+  return new Response('Hello'); // ✅ Web Standard
 });
 ```
 
@@ -54,13 +54,13 @@ When you call `app.listen()`, CurisJS uses the appropriate server:
 // On Bun
 Bun.serve({
   port: 3000,
-  fetch: (req) => app.fetch(req)
+  fetch: (req) => app.fetch(req),
 });
 
 // On Deno
 Deno.serve({
   port: 3000,
-  handler: (req) => app.fetch(req)
+  handler: (req) => app.fetch(req),
 });
 
 // On Node.js 18+
@@ -96,7 +96,7 @@ Run on any runtime:
 # Bun
 bun run server.ts
 
-# Deno  
+# Deno
 deno run --allow-net server.ts
 
 # Node.js 18+
@@ -124,11 +124,12 @@ The `createHandler()` function returns:
 
 ```typescript
 {
-  fetch: (request: Request, env?: any) => app.fetch(request, env)
+  fetch: (request: Request, env?: any) => app.fetch(request, env);
 }
 ```
 
 This matches the expected format for:
+
 - Cloudflare Workers (`export default { fetch }`)
 - Vercel Edge Functions
 - Other edge platforms
@@ -150,9 +151,9 @@ app.get('/api/health', (ctx) => {
 });
 
 app.get('/api/users/:id', (ctx) => {
-  return json({ 
+  return json({
     userId: ctx.params.id,
-    name: 'John Doe' 
+    name: 'John Doe',
   });
 });
 
@@ -204,10 +205,10 @@ app.get('/', (ctx) => {
   // Access Cloudflare Worker environment
   const apiKey = ctx.env.API_KEY;
   const kv = ctx.env.MY_KV_NAMESPACE;
-  
-  return json({ 
+
+  return json({
     message: 'Hello from Workers!',
-    hasKey: !!apiKey 
+    hasKey: !!apiKey,
   });
 });
 
@@ -222,11 +223,14 @@ import { createApp, json } from '@curisjs/core';
 const app = createApp({
   onError: (error, ctx) => {
     console.error('Error:', error);
-    return json({ 
-      error: error.message,
-      path: ctx.request.url 
-    }, 500);
-  }
+    return json(
+      {
+        error: error.message,
+        path: ctx.request.url,
+      },
+      500
+    );
+  },
 });
 
 app.get('/error', (ctx) => {
@@ -243,12 +247,12 @@ app.listen(3000);
 ```typescript
 // Old approach - required different code per runtime
 import { createApp } from '@curisjs/core';
-import { serve } from '@curisjs/core/node';  // ❌ Runtime-specific
+import { serve } from '@curisjs/core/node'; // ❌ Runtime-specific
 
 const app = createApp();
 app.get('/', () => new Response('Hello'));
 
-serve(app, { port: 3000 });  // ❌ Only works on Node.js
+serve(app, { port: 3000 }); // ❌ Only works on Node.js
 ```
 
 ### After (runtime agnostic)
@@ -260,7 +264,7 @@ import { createApp } from '@curisjs/core';
 const app = createApp();
 app.get('/', () => new Response('Hello'));
 
-app.listen(3000);  // ✅ Works on Bun, Deno, Node.js
+app.listen(3000); // ✅ Works on Bun, Deno, Node.js
 ```
 
 ## Legacy Node.js Support
@@ -286,7 +290,7 @@ On Bun and Deno, there's **zero conversion** between request/response objects:
 ```typescript
 // Native Web Standards - no conversion needed!
 Bun.serve({
-  fetch: (req: Request) => app.fetch(req)  // ✅ Direct
+  fetch: (req: Request) => app.fetch(req), // ✅ Direct
 });
 ```
 
@@ -301,9 +305,9 @@ app.get('/stream', (ctx) => {
       controller.enqueue(new TextEncoder().encode('chunk 1\n'));
       controller.enqueue(new TextEncoder().encode('chunk 2\n'));
       controller.close();
-    }
+    },
   });
-  
+
   return new Response(stream);
 });
 ```
@@ -354,7 +358,7 @@ app.get('/', (ctx) => {
   // Node.js: process.env.VAR_NAME
   // Bun: Bun.env.VAR_NAME
   // Deno: Deno.env.get('VAR_NAME')
-  
+
   const config = ctx.env.CONFIG || process.env.CONFIG;
   return json({ config });
 });
@@ -464,6 +468,6 @@ CurisJS is now **truly runtime-agnostic**:
 ✅ **Web Standards** first  
 ✅ **Auto-detection** of runtime  
 ✅ **Type-safe** and production-ready  
-✅ **High performance** with zero overhead  
+✅ **High performance** with zero overhead
 
 This makes CurisJS one of the most portable web frameworks in the JavaScript ecosystem! 🚀

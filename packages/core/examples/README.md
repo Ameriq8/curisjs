@@ -56,6 +56,7 @@ node --loader ts-node/esm node-server.ts
 ### Cloudflare Workers
 
 1. Create `wrangler.toml`:
+
 ```toml
 name = "curisjs-worker"
 main = "cloudflare-worker.ts"
@@ -63,6 +64,7 @@ compatibility_date = "2024-01-01"
 ```
 
 2. Deploy:
+
 ```bash
 wrangler deploy
 ```
@@ -70,6 +72,7 @@ wrangler deploy
 ### Vercel Edge Functions
 
 1. Create `vercel.json`:
+
 ```json
 {
   "functions": {
@@ -81,6 +84,7 @@ wrangler deploy
 ```
 
 2. Deploy:
+
 ```bash
 vercel deploy
 ```
@@ -117,7 +121,7 @@ app.listen(3000);
 
 // Logs:
 // - "🚀 Server running on http://localhost:3000 (Bun)" on Bun
-// - "🚀 Server running on http://localhost:3000 (Deno)" on Deno  
+// - "🚀 Server running on http://localhost:3000 (Deno)" on Deno
 // - "🚀 Server running on http://localhost:3000 (Node.js)" on Node
 ```
 
@@ -129,10 +133,10 @@ Built entirely on Web Standards (Request/Response):
 app.get('/users/:id', async (ctx) => {
   // Standard Request object
   const headers = ctx.request.headers;
-  
+
   // Standard methods
   const data = await ctx.json();
-  
+
   // Standard Response
   return new Response('Hello', { status: 200 });
 });
@@ -185,7 +189,7 @@ const app = createApp({
   onError: (error, ctx) => {
     console.error(error);
     return json({ error: error.message }, 500);
-  }
+  },
 });
 ```
 

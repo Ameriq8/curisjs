@@ -52,19 +52,23 @@ pnpm add mysql2
 import { Model, schema } from '@curisjs/db';
 
 // Define schema
-const todoSchema = schema.define('todos', {
-  id: schema.integer().primaryKey().autoIncrement(),
-  title: schema.string().notNullable(),
-  completed: schema.boolean().default(false).notNullable(),
-}, {
-  timestamps: true, // Adds createdAt, updatedAt
-});
+const todoSchema = schema.define(
+  'todos',
+  {
+    id: schema.integer().primaryKey().autoIncrement(),
+    title: schema.string().notNullable(),
+    completed: schema.boolean().default(false).notNullable(),
+  },
+  {
+    timestamps: true, // Adds createdAt, updatedAt
+  }
+);
 
 // Create model
 export class Todo extends Model {
   static tableName = 'todos';
   static schema = todoSchema;
-  
+
   id!: number;
   title!: string;
   completed!: boolean;
@@ -124,9 +128,7 @@ const todos = await Todo.query()
   .get();
 
 // With raw Knex queries
-const results = await ctx.db.knex('todos')
-  .where('completed', true)
-  .count('* as total');
+const results = await ctx.db.knex('todos').where('completed', true).count('* as total');
 ```
 
 ### 4. Transactions
@@ -136,28 +138,24 @@ import { transaction } from '@curisjs/db';
 
 app.post('/transfer', async (ctx) => {
   const { fromId, toId, amount } = await ctx.json();
-  
+
   const result = await transaction(async (trx) => {
     // Deduct from sender
-    await trx('accounts')
-      .where({ id: fromId })
-      .decrement('balance', amount);
-    
+    await trx('accounts').where({ id: fromId }).decrement('balance', amount);
+
     // Add to receiver
-    await trx('accounts')
-      .where({ id: toId })
-      .increment('balance', amount);
-    
+    await trx('accounts').where({ id: toId }).increment('balance', amount);
+
     // Create record
     const [id] = await trx('transactions').insert({
       fromId,
       toId,
       amount,
     });
-    
+
     return id;
   });
-  
+
   return json({ transactionId: result });
 });
 ```

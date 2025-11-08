@@ -3,8 +3,8 @@
  */
 
 import type { Knex } from 'knex';
-import { getDatabase } from './connection.js';
-import { QueryBuilder } from './query-builder.js';
+import { getDatabase } from './connection';
+import { QueryBuilder } from './query-builder';
 import type {
   CreateInput,
   UpdateInput,
@@ -12,7 +12,7 @@ import type {
   HookFunction,
   HookType,
   SchemaDefinition,
-} from './types.js';
+} from './types';
 
 export class Model<T = any> {
   /**
@@ -44,6 +44,11 @@ export class Model<T = any> {
    * Enable soft deletes (deleted_at)
    */
   static softDeletes: boolean = false;
+
+  /**
+   * Relations registry
+   */
+  static relations: Map<string, any> = new Map();
 
   /**
    * Hooks registry
@@ -122,11 +127,11 @@ export class Model<T = any> {
     }
 
     // Apply order by
-      if (options.orderBy) {
-        for (const [column, direction] of Object.entries(options.orderBy)) {
-          query = query.orderBy(column as any, direction as 'asc' | 'desc');
-        }
-      }    // Apply limit
+    if (options.orderBy) {
+      for (const [column, direction] of Object.entries(options.orderBy)) {
+        query = query.orderBy(column as any, direction as 'asc' | 'desc');
+      }
+    } // Apply limit
     if (options.limit) {
       query = query.limit(options.limit);
     }
@@ -194,10 +199,7 @@ export class Model<T = any> {
   /**
    * Update record(s)
    */
-  static async update<T = any>(
-    options: { where: any },
-    data: UpdateInput<T>
-  ): Promise<number> {
+  static async update<T = any>(options: { where: any }, data: UpdateInput<T>): Promise<number> {
     const db = this.getDB();
     const updateData: any = { ...data };
 
@@ -230,9 +232,7 @@ export class Model<T = any> {
 
     if (this.softDeletes) {
       // Soft delete
-      count = await db(this.tableName)
-        .where(options.where)
-        .update({ deletedAt: new Date() });
+      count = await db(this.tableName).where(options.where).update({ deletedAt: new Date() });
     } else {
       // Hard delete
       count = await db(this.tableName).where(options.where).del();
@@ -388,6 +388,31 @@ export class Model<T = any> {
 
     const db = this.getDB();
     return await db(this.tableName).where(options.where).update({ deletedAt: null });
+  }
+
+  /**
+   * Load a relation
+   */
+  async load(relation: string): Promise<this> {
+    const relationDef = (this.constructor as typeof Model).relations.get(relation);
+    if (!relationDef) {
+      throw new Error(`Unknown relation: ${relation}`);
+    }
+
+    const { RelationLoader } = await import('./relations/loader');
+    const data = await RelationLoader.loadOne(this, relationDef);
+    (this as any)[relation] = data;
+    return this;
+  }
+
+  /**
+   * Load multiple relations for this instance
+   */
+  async loadMany(relations: string[]): Promise<this> {
+    for (const relation of relations) {
+      await this.load(relation);
+    }
+    return this;
   }
 
   /**

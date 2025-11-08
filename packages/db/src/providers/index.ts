@@ -2,4 +2,4 @@
  * Provider exports
  */
 
-export { DatabaseServiceProvider } from './DatabaseServiceProvider.js';
+export { DatabaseServiceProvider } from './DatabaseServiceProvider';

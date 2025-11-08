@@ -6,7 +6,7 @@
  * Run: bun run examples/transactions.ts
  */
 
-import { createDatabase, transaction } from '../src/index.js';
+import { createDatabase, transaction } from '../src/index';
 
 // Initialize database
 const db = createDatabase({
@@ -33,9 +33,9 @@ await db.schema.createTable('transactions', (table) => {
 
 // Insert test accounts
 await db('accounts').insert([
-  { name: 'Alice', balance: 1000.00 },
-  { name: 'Bob', balance: 500.00 },
-  { name: 'Charlie', balance: 750.00 },
+  { name: 'Alice', balance: 1000.0 },
+  { name: 'Bob', balance: 500.0 },
+  { name: 'Charlie', balance: 750.0 },
 ]);
 
 console.log('💰 Transaction Examples\n');
@@ -51,14 +51,10 @@ console.log('1️⃣ Transfer $200 from Alice to Bob (SUCCESS):');
 try {
   await transaction(async (trx) => {
     // Deduct from Alice
-    await trx('accounts')
-      .where('name', 'Alice')
-      .decrement('balance', 200);
+    await trx('accounts').where('name', 'Alice').decrement('balance', 200);
 
     // Add to Bob
-    await trx('accounts')
-      .where('name', 'Bob')
-      .increment('balance', 200);
+    await trx('accounts').where('name', 'Bob').increment('balance', 200);
 
     // Record transaction
     await trx('transactions').insert({
@@ -89,13 +85,9 @@ try {
     }
 
     // This won't execute due to the error above
-    await trx('accounts')
-      .where('name', 'Bob')
-      .decrement('balance', 1000);
+    await trx('accounts').where('name', 'Bob').decrement('balance', 1000);
 
-    await trx('accounts')
-      .where('name', 'Charlie')
-      .increment('balance', 1000);
+    await trx('accounts').where('name', 'Charlie').increment('balance', 1000);
 
     await trx('transactions').insert({
       from_account_id: 2,
@@ -147,9 +139,7 @@ console.log('');
 
 // Show all transactions
 console.log('Transaction history:');
-const allTransactions = await db('transactions')
-  .select('*')
-  .orderBy('created_at', 'desc');
+const allTransactions = await db('transactions').select('*').orderBy('created_at', 'desc');
 console.table(allTransactions);
 
 // Cleanup

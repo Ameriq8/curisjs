@@ -6,7 +6,7 @@
  * Run: bun run examples/query-builder.ts
  */
 
-import { createDatabase } from '../src/index.js';
+import { createDatabase } from '../src/index';
 
 // Initialize database
 const db = createDatabase({
@@ -44,9 +44,7 @@ console.log('');
 
 // Example 2: Filtered query
 console.log('2️⃣ Users from New York:');
-const nyUsers = await db('users')
-  .where('city', 'New York')
-  .select('name', 'email');
+const nyUsers = await db('users').where('city', 'New York').select('name', 'email');
 console.log(nyUsers);
 console.log('');
 
@@ -85,10 +83,8 @@ console.log(`Average age: ${avgAge?.avgAge || 0}`);
 console.log('');
 
 // Example 7: Update
-console.log('7️⃣ Update Bob\'s age:');
-await db('users')
-  .where('name', 'Bob')
-  .update({ age: 31 });
+console.log("7️⃣ Update Bob's age:");
+await db('users').where('name', 'Bob').update({ age: 31 });
 const bob = await db('users').where('name', 'Bob').first();
 console.log(`Bob's new age: ${bob.age}`);
 console.log('');

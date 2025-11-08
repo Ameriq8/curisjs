@@ -3,7 +3,7 @@
  * This file tests that the same code works across all runtimes
  */
 
-import { createApp, createHandler, json, text, html } from '../src/index.js';
+import { createApp, createHandler, json, text, html } from '../src/index';
 import { describe, it, expect } from 'vitest';
 
 describe('Runtime Agnostic Features', () => {
@@ -97,7 +97,7 @@ describe('Runtime Agnostic Features', () => {
     const app = createApp({
       onError: (error, ctx) => {
         return json({ error: error.message }, { status: 500 });
-      }
+      },
     });
 
     app.get('/error', (ctx) => {
@@ -157,7 +157,7 @@ describe('Runtime Agnostic Features', () => {
     });
 
     const request = new Request('http://localhost/headers', {
-      headers: { 'Authorization': 'Bearer token123' }
+      headers: { Authorization: 'Bearer token123' },
     });
 
     const response = await app.fetch(request);

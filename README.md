@@ -60,7 +60,7 @@ app.get('/', () => new Response('Hello World!'));
 
 app.get('/users/:id', (ctx) => {
   return Response.json({
-    userId: ctx.params.id
+    userId: ctx.params.id,
   });
 });
 
@@ -156,18 +156,18 @@ pnpm test
 
 ## 📜 Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm build` | Build all packages |
-| `pnpm dev` | Start development mode with watch |
-| `pnpm test` | Run all tests |
-| `pnpm test:watch` | Run tests in watch mode |
-| `pnpm test:coverage` | Generate test coverage report |
-| `pnpm lint` | Lint code with ESLint |
-| `pnpm format` | Format code with Prettier |
-| `pnpm format:check` | Check code formatting |
-| `pnpm typecheck` | Type-check all packages |
-| `pnpm clean` | Clean build artifacts |
+| Command              | Description                       |
+| -------------------- | --------------------------------- |
+| `pnpm build`         | Build all packages                |
+| `pnpm dev`           | Start development mode with watch |
+| `pnpm test`          | Run all tests                     |
+| `pnpm test:watch`    | Run tests in watch mode           |
+| `pnpm test:coverage` | Generate test coverage report     |
+| `pnpm lint`          | Lint code with ESLint             |
+| `pnpm format`        | Format code with Prettier         |
+| `pnpm format:check`  | Check code formatting             |
+| `pnpm typecheck`     | Type-check all packages           |
+| `pnpm clean`         | Clean build artifacts             |
 
 ## 📖 Documentation
 
@@ -189,6 +189,7 @@ pnpm dev
 ```
 
 The template includes:
+
 - ✅ Project structure best practices
 - ✅ Example controllers and routes
 - ✅ Database integration setup
@@ -201,6 +202,7 @@ The template includes:
 CurisJS works across multiple JavaScript runtimes:
 
 ### Node.js
+
 ```typescript
 import { createApp } from '@curisjs/core';
 import { serve } from '@curisjs/core/node';
@@ -211,6 +213,7 @@ await serve(app, { port: 3000 });
 ```
 
 ### Bun
+
 ```typescript
 import { createApp } from '@curisjs/core';
 
@@ -224,6 +227,7 @@ export default {
 ```
 
 ### Deno
+
 ```typescript
 import { createApp } from '@curisjs/core';
 

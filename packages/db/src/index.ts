@@ -4,27 +4,70 @@
  */
 
 // Core exports
-export { Model } from './model.js';
-export { QueryBuilder } from './query-builder.js';
-export { schema, SchemaBuilder, ColumnBuilder } from './schema/builder.js';
+export { Model } from './model';
+export { QueryBuilder } from './query-builder';
+export { schema, SchemaBuilder, ColumnBuilder } from './schema/builder';
 
 // Connection management
-export {
-  ConnectionManager,
-  createDatabase,
-  getDatabase,
-  closeDatabase,
-} from './connection.js';
+export { ConnectionManager, createDatabase, getDatabase, closeDatabase } from './connection';
 
 // Transactions
-export { transaction, beginTransaction, Transaction } from './transaction.js';
+export { transaction, beginTransaction, Transaction } from './transaction';
+
+// Migrations
+export {
+  createMigrationRunner,
+  createMigrationGenerator,
+  migrate,
+  rollback,
+  getMigrationStatus,
+  MigrationRunner,
+  MigrationGenerator,
+  MigrationTracker,
+} from './migrations/index';
+export type {
+  Migration,
+  MigrationRecord,
+  MigrationStatus,
+  MigrationConfig,
+} from './migrations/index';
+
+// Relations
+export { hasOne, hasMany, belongsTo, belongsToMany, RelationLoader } from './relations/index';
+export type {
+  Relation,
+  RelationConfig,
+  BelongsToManyConfig,
+  EagerLoadOptions,
+} from './relations/index';
+
+// Seeders
+export {
+  BaseSeeder,
+  createSeederRunner,
+  seed,
+  runSeeder,
+  SeederRunner,
+  Factory,
+  defineFactory,
+  defineRawFactory,
+} from './seeders/index';
+export type { Seeder, SeederConfig, FactoryConfig } from './seeders/index';
+
+// Validation
+export {
+  generateValidationRules,
+  schemaToValidator,
+  createValidator,
+  validateWith,
+} from './validation/index';
 
 // Middleware
-export { database as databaseMiddleware } from './middleware/index.js';
-export type { DatabaseMiddlewareOptions } from './middleware/index.js';
+export { database as databaseMiddleware } from './middleware/index';
+export type { DatabaseMiddlewareOptions } from './middleware/index';
 
 // Providers
-export { DatabaseServiceProvider } from './providers/index.js';
+export { DatabaseServiceProvider } from './providers/index';
 
 // Types
 export type {
@@ -38,9 +81,7 @@ export type {
   QueryOptions,
   PaginatedResult,
   ModelConstructor,
-  Migration,
   MigrationInfo,
-  Seeder,
   RelationType,
   RelationDefinition,
   ModelAttributes,
@@ -49,10 +90,10 @@ export type {
   HookType,
   HookFunction,
   DatabaseInstance,
-} from './types.js';
+} from './types';
 
-import { Model } from './model.js';
-import type { ConnectionConfig } from './types.js';
+import { Model } from './model';
+import type { ConnectionConfig } from './types';
 
 /**
  * Helper function to define a model with type inference
@@ -77,9 +118,7 @@ export function defineModel<T extends Record<string, any>>(config: {
 /**
  * Helper function to define database config
  */
-export function defineConfig(
-  config: ConnectionConfig
-): { default: ConnectionConfig } {
+export function defineConfig(config: ConnectionConfig): { default: ConnectionConfig } {
   return {
     default: config,
   };

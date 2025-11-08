@@ -7,7 +7,7 @@ Simple, standalone examples demonstrating @curisjs/db features.
 ### Server Examples
 
 - **`bun-server.ts`** - Todo API with Bun runtime
-- **`deno-server.ts`** - Todo API with Deno runtime  
+- **`deno-server.ts`** - Todo API with Deno runtime
 - **`node-server.ts`** - Todo API with Node.js runtime
 
 ### Feature Examples
@@ -19,6 +19,7 @@ Simple, standalone examples demonstrating @curisjs/db features.
 ## Running Examples
 
 ### Bun
+
 ```bash
 # From the db package directory
 cd packages/db
@@ -31,11 +32,13 @@ bun run examples/model-crud.ts
 ```
 
 ### Deno
+
 ```bash
 deno run --allow-net --allow-read --allow-write examples/deno-server.ts
 ```
 
 ### Node.js
+
 ```bash
 node --loader ts-node/esm examples/node-server.ts
 ```
@@ -43,6 +46,7 @@ node --loader ts-node/esm examples/node-server.ts
 ## What Each Example Demonstrates
 
 ### Server Examples
+
 - Basic CRUD operations (Create, Read, Update, Delete)
 - Database initialization
 - Schema definition
@@ -51,6 +55,7 @@ node --loader ts-node/esm examples/node-server.ts
 - Runtime-agnostic code
 
 ### Query Builder Example
+
 - Simple SELECT queries
 - Filtered queries with WHERE
 - Range queries (BETWEEN)
@@ -61,6 +66,7 @@ node --loader ts-node/esm examples/node-server.ts
 - Raw queries
 
 ### Transactions Example
+
 - Successful transaction with commit
 - Failed transaction with rollback
 - Multiple operations in one transaction
@@ -68,6 +74,7 @@ node --loader ts-node/esm examples/node-server.ts
 - ACID compliance demonstration
 
 ### Model CRUD Example
+
 - Creating records
 - Finding by ID
 - Finding many with filters
