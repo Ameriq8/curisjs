@@ -25,88 +25,104 @@ async function main() {
 
     switch (command) {
       // Project scaffolding
-      case 'new':
+      case 'new': {
         const { runNewCommand } = await import('../dist/commands/new');
         await runNewCommand(args.slice(1));
         break;
+      }
 
       // Database commands
-      case 'db:migrate':
+      case 'db:migrate': {
         const { runMigrateCommand } = await import('../dist/commands/db/migrate');
         await runMigrateCommand(subcommand, args.slice(2));
         break;
+      }
 
-      case 'db:seed':
+      case 'db:seed': {
         const { runSeedCommand } = await import('../dist/commands/db/seed');
         await runSeedCommand(subcommand, args.slice(2));
         break;
+      }
 
-      case 'db:rollback':
+      case 'db:rollback': {
         const { runRollbackCommand } = await import('../dist/commands/db/migrate');
         await runRollbackCommand(args.slice(1));
         break;
+      }
 
-      case 'db:reset':
+      case 'db:reset': {
         const { runResetCommand } = await import('../dist/commands/db/migrate');
         await runResetCommand();
         break;
+      }
 
-      case 'db:status':
+      case 'db:status': {
         const { runStatusCommand } = await import('../dist/commands/db/migrate');
         await runStatusCommand();
         break;
+      }
 
-      case 'db:wipe':
+      case 'db:wipe': {
         const { runWipeCommand } = await import('../dist/commands/db/utils');
         await runWipeCommand();
         break;
+      }
 
       // Code generators
-      case 'make:migration':
+      case 'make:migration': {
         const { runMakeMigration } = await import('../dist/commands/make/migration');
         await runMakeMigration(args.slice(1));
         break;
+      }
 
-      case 'make:model':
+      case 'make:model': {
         const { runMakeModel } = await import('../dist/commands/make/model');
         await runMakeModel(args.slice(1));
         break;
+      }
 
-      case 'make:controller':
+      case 'make:controller': {
         const { runMakeController } = await import('../dist/commands/make/controller');
         await runMakeController(args.slice(1));
         break;
+      }
 
-      case 'make:service':
+      case 'make:service': {
         const { runMakeService } = await import('../dist/commands/make/service');
         await runMakeService(args.slice(1));
         break;
+      }
 
-      case 'make:middleware':
+      case 'make:middleware': {
         const { runMakeMiddleware } = await import('../dist/commands/make/middleware');
         await runMakeMiddleware(args.slice(1));
         break;
+      }
 
-      case 'make:seeder':
+      case 'make:seeder': {
         const { runMakeSeeder } = await import('../dist/commands/make/seeder');
         await runMakeSeeder(args.slice(1));
         break;
+      }
 
-      case 'make:validator':
+      case 'make:validator': {
         const { runMakeValidator } = await import('../dist/commands/make/validator');
         await runMakeValidator(args.slice(1));
         break;
+      }
 
       // Development server
-      case 'dev':
+      case 'dev': {
         const { runDevCommand } = await import('../dist/commands/dev');
         await runDevCommand(args.slice(1));
         break;
+      }
 
-      case 'build':
+      case 'build': {
         const { runBuildCommand } = await import('../dist/commands/build');
         await runBuildCommand(args.slice(1));
         break;
+      }
 
       default:
         console.error(pc.red(`Unknown command: ${command}`));
@@ -114,9 +130,10 @@ async function main() {
         printHelp();
         process.exit(1);
     }
-  } catch (error: any) {
-    console.error(pc.red('Error:'), error.message);
-    if (process.env.DEBUG) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(pc.red('Error:'), message);
+    if (process.env.DEBUG && error instanceof Error) {
       console.error(error.stack);
     }
     process.exit(1);
