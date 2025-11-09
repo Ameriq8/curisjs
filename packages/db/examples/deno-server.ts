@@ -10,13 +10,17 @@ import { createApp, json } from '@curisjs/core';
 import { Model, schema, createDatabase, databaseMiddleware } from '../src/index.ts';
 
 // Define Todo schema
-const todoSchema = schema.define('todos', {
-  id: schema.integer().primaryKey().autoIncrement(),
-  title: schema.string().length(255).notNullable(),
-  completed: schema.boolean().default(false).notNullable(),
-}, {
-  timestamps: true,
-});
+const todoSchema = schema.define(
+  'todos',
+  {
+    id: schema.integer().primaryKey().autoIncrement(),
+    title: schema.string().length(255).notNullable(),
+    completed: schema.boolean().default(false).notNullable(),
+  },
+  {
+    timestamps: true,
+  }
+);
 
 // Define Todo model
 class Todo extends Model {
@@ -85,7 +89,7 @@ app.post('/todos', async (ctx) => {
 
 app.put('/todos/:id', async (ctx) => {
   const id = parseInt(ctx.params.id!);
-  await Todo.update({ where: { id } }, await ctx.json() as any);
+  await Todo.update({ where: { id } }, (await ctx.json()) as any);
   const todo = await Todo.find(id);
   return json(todo);
 });

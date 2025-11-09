@@ -3,7 +3,7 @@
  */
 
 import type { Knex } from 'knex';
-import { getDatabase } from './connection.js';
+import { getDatabase } from './connection';
 
 /**
  * Execute a function within a transaction
@@ -71,9 +71,7 @@ export class Transaction {
 /**
  * Create a manual transaction (requires explicit commit/rollback)
  */
-export async function beginTransaction(
-  connectionName: string = 'default'
-): Promise<Transaction> {
+export async function beginTransaction(connectionName: string = 'default'): Promise<Transaction> {
   const db = getDatabase(connectionName);
   const trx = await db.transaction();
   return new Transaction(trx);

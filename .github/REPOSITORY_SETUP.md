@@ -1,6 +1,7 @@
 # Repository Information
 
 ## 🏷️ Topics/Tags
+
 Add these topics to your GitHub repository for better discoverability:
 
 - `typescript`
@@ -21,6 +22,7 @@ Add these topics to your GitHub repository for better discoverability:
 ## 📝 Repository Settings
 
 ### General
+
 - **Description**: High-performance web framework for Node.js built on Web Standards
 - **Website**: https://github.com/Ameriq8/curisjs
 - **Topics**: See above
@@ -34,6 +36,7 @@ Add these topics to your GitHub repository for better discoverability:
   - ✅ Packages
 
 ### Branches
+
 - **Default branch**: `main`
 - **Branch protection rules**:
   - Require pull request reviews
@@ -42,15 +45,18 @@ Add these topics to your GitHub repository for better discoverability:
   - Include administrators
 
 ### Pages (Optional)
+
 - **Source**: Deploy from GitHub Actions
 - **Custom domain**: (optional)
 
 ### Security
+
 - ✅ Enable Dependabot alerts
 - ✅ Enable Dependabot security updates
 - ✅ Enable private vulnerability reporting
 
 ### Integrations
+
 - Code scanning with CodeQL
 - Codecov for coverage reports (optional)
 
@@ -96,6 +102,7 @@ git push -u origin develop
 ## 📋 Post-Publication Checklist
 
 ### On GitHub
+
 - [ ] Create repository
 - [ ] Add description and topics
 - [ ] Enable Discussions
@@ -106,12 +113,14 @@ git push -u origin develop
 - [ ] Add repository to profile README
 
 ### Documentation
+
 - [ ] Update all links to point to actual repository
 - [ ] Add SECURITY.md email contact
 - [ ] Create GitHub Pages (optional)
 - [ ] Add badges to README
 
 ### Community
+
 - [ ] Star your own repository
 - [ ] Share on social media
 - [ ] Post on Reddit (r/javascript, r/node, r/typescript)
@@ -120,11 +129,13 @@ git push -u origin develop
 - [ ] Submit to awesome-lists
 
 ### Publishing
+
 - [ ] Create GitHub release v0.1.0
 - [ ] Publish to npm (optional)
 - [ ] Add to TypeScript registry
 
 ### Monitoring
+
 - [ ] Set up repository insights
 - [ ] Monitor issues and PRs
 - [ ] Respond to community feedback

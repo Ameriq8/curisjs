@@ -44,30 +44,34 @@ A type-safe, Knex-based ORM built specifically for CurisJS framework with runtim
 ## 📋 Implementation Tasks
 
 ### Phase 1: Foundation (Core) ✅ COMPLETED
+
 - [x] 1. Setup Package Configuration
 - [x] 2. Core Type Definitions
 - [x] 3. Schema Builder API
 - [x] 4. Database Connection Manager
 - [x] 5. Model Base Class
 
-### Phase 2: Query & Data (Essential Features) ⚠️ PARTIAL
+### Phase 2: Query & Data (Essential Features) ✅ COMPLETED
+
 - [x] 6. Query Builder Implementation
-- [ ] 7. Migration System
-- [ ] 8. Relations Support
+- [x] 7. Migration System
+- [x] 8. Relations Support
 - [x] 9. Transaction API
 
-### Phase 3: Integration (CurisJS) ⚠️ PARTIAL
-- [x] 10. CurisJS Middleware Integration
-- [ ] 11. Validation Integration
-- [x] 12. Advanced Features - Timestamps & Soft Deletes (basic implementation)
-- [ ] 13. Seeding System
+### Phase 3: Integration (CurisJS) ✅ COMPLETED
 
-### Phase 4: Developer Experience ⚠️ PARTIAL
-- [ ] 14. CLI Tool
+- [x] 10. CurisJS Middleware Integration
+- [x] 11. Validation Integration
+- [x] 12. Advanced Features - Timestamps & Soft Deletes
+- [x] 13. Seeding System
+
+### Phase 4: Developer Experience ⚠️ PARTIAL (89% Complete)
+
+- [x] 14. CLI Tool
 - [x] 15. Main Export & API
 - [x] 16. Example Integration - Todo App
-- [ ] 17. Testing Suite
-- [ ] 18. Documentation (basic README completed)
+- [ ] 17. Testing Suite (Optional)
+- [ ] 18. Documentation (Basic completed, advanced guides optional)
 
 ## 💡 Usage Examples
 
@@ -122,37 +126,37 @@ app.get('/users/:id', async (ctx) => {
     where: { id: parseInt(ctx.params.id) },
     include: { posts: true },
   });
-  
+
   if (!user) {
     return json({ error: 'User not found' }, { status: 404 });
   }
-  
+
   return json(user);
 });
 
 // Create user
 app.post('/users', async (ctx) => {
   const data = await ctx.json();
-  
+
   // Validation (integrated with @curisjs/core)
   const validated = await ctx.validateOrFail(userSchema);
-  
+
   const user = await ctx.db.users.create({
     data: validated,
   });
-  
+
   return json(user, { status: 201 });
 });
 
 // Update user
 app.put('/users/:id', async (ctx) => {
   const data = await ctx.json();
-  
+
   const user = await ctx.db.users.update({
     where: { id: parseInt(ctx.params.id) },
     data,
   });
-  
+
   return json(user);
 });
 
@@ -161,7 +165,7 @@ app.delete('/users/:id', async (ctx) => {
   await ctx.db.users.delete({
     where: { id: parseInt(ctx.params.id) },
   });
-  
+
   return json({ message: 'User deleted' });
 });
 ```
@@ -171,26 +175,26 @@ app.delete('/users/:id', async (ctx) => {
 ```typescript
 app.post('/transfer', async (ctx) => {
   const { fromId, toId, amount } = await ctx.json();
-  
+
   const result = await ctx.db.transaction(async (trx) => {
     // Deduct from sender
     await trx.accounts.update({
       where: { id: fromId },
       data: { balance: db.raw('balance - ?', [amount]) },
     });
-    
+
     // Add to receiver
     await trx.accounts.update({
       where: { id: toId },
       data: { balance: db.raw('balance + ?', [amount]) },
     });
-    
+
     // Create transaction record
     return await trx.transactions.create({
       data: { fromId, toId, amount },
     });
   });
-  
+
   return json(result);
 });
 ```
@@ -201,7 +205,7 @@ app.post('/transfer', async (ctx) => {
 // Complex queries
 app.get('/search', async (ctx) => {
   const { query, status, minPrice } = ctx.queries();
-  
+
   const products = await ctx.db.products
     .where('name', 'like', `%${query}%`)
     .orWhere('description', 'like', `%${query}%`)
@@ -210,7 +214,7 @@ app.get('/search', async (ctx) => {
     .orderBy('price', 'asc')
     .limit(20)
     .get();
-  
+
   return json(products);
 });
 ```
@@ -223,7 +227,7 @@ class User extends Model {
   posts() {
     return this.hasMany(Post, 'userId');
   }
-  
+
   profile() {
     return this.hasOne(Profile, 'userId');
   }
@@ -233,7 +237,7 @@ class Post extends Model {
   author() {
     return this.belongsTo(User, 'userId');
   }
-  
+
   tags() {
     return this.belongsToMany(Tag, 'post_tags', 'postId', 'tagId');
   }
@@ -291,7 +295,7 @@ export class UserSeeder extends Seeder {
       name: 'Admin User',
       password: await hash('password'),
     });
-    
+
     // Create 100 test users
     await User.factory(100).create();
   }
@@ -309,14 +313,16 @@ import { DatabaseServiceProvider } from '@curisjs/db/providers';
 const app = createApp();
 
 // Register database service provider
-app.register(new DatabaseServiceProvider({
-  connection: {
-    client: 'better-sqlite3',
+app.register(
+  new DatabaseServiceProvider({
     connection: {
-      filename: './database.sqlite',
+      client: 'better-sqlite3',
+      connection: {
+        filename: './database.sqlite',
+      },
     },
-  },
-}));
+  })
+);
 
 // Boot application (initializes database)
 await app.boot();
@@ -352,18 +358,18 @@ export default defineConfig({
       max: 10,
     },
   },
-  
+
   // Migrations
   migrations: {
     directory: './migrations',
     tableName: 'migrations',
   },
-  
+
   // Seeds
   seeds: {
     directory: './seeders',
   },
-  
+
   // Features
   features: {
     timestamps: true,
@@ -413,15 +419,15 @@ curisdb seed
 
 ## 📊 Comparison with Other ORMs
 
-| Feature | @curisjs/db | Prisma | Drizzle | TypeORM |
-|---------|-------------|--------|---------|---------|
-| Type Safety | ✅ Full | ✅ Full | ✅ Full | ⚠️ Partial |
-| CurisJS Integration | ✅ Native | ❌ None | ❌ None | ❌ None |
-| Runtime Agnostic | ✅ Yes | ⚠️ Limited | ✅ Yes | ✅ Yes |
-| Schema in TypeScript | ✅ Yes | ❌ No (DSL) | ✅ Yes | ✅ Yes |
-| Query Builder | ✅ Knex | ❌ Custom | ✅ Drizzle | ✅ TypeORM |
-| Learning Curve | 🟢 Easy | 🟡 Medium | 🟢 Easy | 🔴 Hard |
-| Bundle Size | 🟢 Small | 🔴 Large | 🟢 Small | 🔴 Large |
+| Feature              | @curisjs/db | Prisma      | Drizzle    | TypeORM    |
+| -------------------- | ----------- | ----------- | ---------- | ---------- |
+| Type Safety          | ✅ Full     | ✅ Full     | ✅ Full    | ⚠️ Partial |
+| CurisJS Integration  | ✅ Native   | ❌ None     | ❌ None    | ❌ None    |
+| Runtime Agnostic     | ✅ Yes      | ⚠️ Limited  | ✅ Yes     | ✅ Yes     |
+| Schema in TypeScript | ✅ Yes      | ❌ No (DSL) | ✅ Yes     | ✅ Yes     |
+| Query Builder        | ✅ Knex     | ❌ Custom   | ✅ Drizzle | ✅ TypeORM |
+| Learning Curve       | 🟢 Easy     | 🟡 Medium   | 🟢 Easy    | 🔴 Hard    |
+| Bundle Size          | 🟢 Small    | 🔴 Large    | 🟢 Small   | 🔴 Large   |
 
 ## 🎯 Next Steps
 

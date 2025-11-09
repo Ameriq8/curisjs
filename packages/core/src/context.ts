@@ -3,8 +3,6 @@
  * Zero-allocation getters where possible
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import type { Context, ContextState, Environment, RouteParams } from './types/index';
 import type { Schema, ValidationResult } from './validation/schema';
 import { SchemaValidationError } from './validation/schema';

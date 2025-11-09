@@ -3,7 +3,7 @@
  * This file tests that the same code works across all runtimes
  */
 
-import { createApp, createHandler, json, text, html } from '../src/index.js';
+import { createApp, createHandler, json, text, html } from '../src/index';
 import { describe, it, expect } from 'vitest';
 
 describe('Runtime Agnostic Features', () => {
@@ -17,7 +17,7 @@ describe('Runtime Agnostic Features', () => {
   it('should handle GET request', async () => {
     const app = createApp();
 
-    app.get('/test', (ctx) => {
+    app.get('/test', (_ctx) => {
       return json({ message: 'Hello World!' });
     });
 
@@ -74,7 +74,7 @@ describe('Runtime Agnostic Features', () => {
       await next();
     });
 
-    app.get('/test', (ctx) => json({ ok: true }));
+    app.get('/test', (_ctx) => json({ ok: true }));
 
     const request = new Request('http://localhost/test');
     await app.fetch(request);
@@ -85,7 +85,7 @@ describe('Runtime Agnostic Features', () => {
   it('should handle 404', async () => {
     const app = createApp();
 
-    app.get('/exists', (ctx) => json({ ok: true }));
+    app.get('/exists', (_ctx) => json({ ok: true }));
 
     const request = new Request('http://localhost/not-found');
     const response = await app.fetch(request);
@@ -95,12 +95,12 @@ describe('Runtime Agnostic Features', () => {
 
   it('should handle custom error handler', async () => {
     const app = createApp({
-      onError: (error, ctx) => {
+      onError: (error, _ctx) => {
         return json({ error: error.message }, { status: 500 });
-      }
+      },
     });
 
-    app.get('/error', (ctx) => {
+    app.get('/error', (_ctx) => {
       throw new Error('Test error');
     });
 
@@ -115,9 +115,9 @@ describe('Runtime Agnostic Features', () => {
   it('should support response helpers', async () => {
     const app = createApp();
 
-    app.get('/json', (ctx) => json({ type: 'json' }));
-    app.get('/text', (ctx) => text('plain text'));
-    app.get('/html', (ctx) => html('<h1>HTML</h1>'));
+    app.get('/json', (_ctx) => json({ type: 'json' }));
+    app.get('/text', (_ctx) => text('plain text'));
+    app.get('/html', (_ctx) => html('<h1>HTML</h1>'));
 
     // Test JSON
     const jsonResponse = await app.fetch(new Request('http://localhost/json'));
@@ -157,7 +157,7 @@ describe('Runtime Agnostic Features', () => {
     });
 
     const request = new Request('http://localhost/headers', {
-      headers: { 'Authorization': 'Bearer token123' }
+      headers: { Authorization: 'Bearer token123' },
     });
 
     const response = await app.fetch(request);
@@ -168,10 +168,10 @@ describe('Runtime Agnostic Features', () => {
   it('should support multiple HTTP methods on same path', async () => {
     const app = createApp();
 
-    app.get('/resource', (ctx) => json({ method: 'GET' }));
-    app.post('/resource', (ctx) => json({ method: 'POST' }));
-    app.put('/resource', (ctx) => json({ method: 'PUT' }));
-    app.delete('/resource', (ctx) => json({ method: 'DELETE' }));
+    app.get('/resource', (_ctx) => json({ method: 'GET' }));
+    app.post('/resource', (_ctx) => json({ method: 'POST' }));
+    app.put('/resource', (_ctx) => json({ method: 'PUT' }));
+    app.delete('/resource', (_ctx) => json({ method: 'DELETE' }));
 
     // Test GET
     const getRes = await app.fetch(new Request('http://localhost/resource'));
@@ -198,7 +198,7 @@ describe('Runtime Agnostic Features', () => {
 describe('createHandler for Edge Runtimes', () => {
   it('should create handler with fetch method', async () => {
     const app = createApp();
-    app.get('/', (ctx) => json({ edge: true }));
+    app.get('/', (_ctx) => json({ edge: true }));
 
     const handler = createHandler(app);
 

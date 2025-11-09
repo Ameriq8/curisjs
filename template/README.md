@@ -55,6 +55,7 @@ curis create my-app
 ```
 
 The CLI will automatically:
+
 - Create the project structure
 - Set up dependencies with correct paths
 - Configure TypeScript and tooling

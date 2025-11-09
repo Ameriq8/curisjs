@@ -4,7 +4,7 @@
  * Or: tsx node-server.ts
  */
 
-import { createApp, json } from '../src/index.js';
+import { createApp, json } from '../src/index';
 
 const app = createApp();
 
@@ -13,14 +13,14 @@ app.get('/', (ctx) => {
     message: 'Hello from Node.js!',
     runtime: 'Node.js',
     version: process.version,
-    url: ctx.request.url
+    url: ctx.request.url,
   });
 });
 
 app.get('/users/:id', (ctx) => {
   return json({
     user: ctx.params.id,
-    runtime: 'Node.js'
+    runtime: 'Node.js',
   });
 });
 
@@ -28,7 +28,7 @@ app.post('/data', async (ctx) => {
   const data = await ctx.json();
   return json({
     received: data,
-    runtime: 'Node.js'
+    runtime: 'Node.js',
   });
 });
 

@@ -11,14 +11,14 @@ app.get('/', (ctx) => {
   return json({
     message: 'Hello from Vercel Edge!',
     runtime: 'Vercel Edge',
-    url: ctx.request.url
+    url: ctx.request.url,
   });
 });
 
 app.get('/api/users/:id', (ctx) => {
   return json({
     user: ctx.params.id,
-    runtime: 'Vercel Edge'
+    runtime: 'Vercel Edge',
   });
 });
 
@@ -26,7 +26,7 @@ app.post('/api/data', async (ctx) => {
   const data = await ctx.json();
   return json({
     received: data,
-    runtime: 'Vercel Edge'
+    runtime: 'Vercel Edge',
   });
 });
 

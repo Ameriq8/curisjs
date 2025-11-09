@@ -3,9 +3,9 @@
  */
 
 import type { Context, Middleware, Next } from '@curisjs/core';
-import { getDatabase } from '../connection.js';
+import { getDatabase } from '../connection';
 import type { Knex } from 'knex';
-import { transaction } from '../transaction.js';
+import { transaction } from '../transaction';
 
 /**
  * Database middleware options

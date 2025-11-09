@@ -14,10 +14,12 @@ We release patches for security vulnerabilities for the following versions:
 We take the security of CurisJS seriously. If you believe you have found a security vulnerability, please report it to us as described below.
 
 ### Please DO NOT:
+
 - Open a public GitHub issue for security vulnerabilities
 - Disclose the vulnerability publicly before it has been addressed
 
 ### Please DO:
+
 1. **Email:** Send details to amer.mo2377@outlook.com
 2. **Include:**
    - Description of the vulnerability
@@ -27,6 +29,7 @@ We take the security of CurisJS seriously. If you believe you have found a secur
 3. **Response Time:** You can expect an initial response within 48 hours
 
 ### What to Expect:
+
 1. **Acknowledgment:** We'll acknowledge receipt of your report
 2. **Investigation:** We'll investigate and validate the issue
 3. **Fix:** We'll develop and test a fix
@@ -38,36 +41,43 @@ We take the security of CurisJS seriously. If you believe you have found a secur
 When using CurisJS in production:
 
 ### Input Validation
+
 - Always validate and sanitize user input
 - Use the built-in validation system
 - Never trust client-side data
 
 ### Authentication & Authorization
+
 - Implement proper authentication middleware
 - Use secure session management
 - Validate permissions for protected routes
 
 ### Error Handling
+
 - Don't expose sensitive information in error messages
 - Use custom error handlers
 - Log errors securely
 
 ### Dependencies
+
 - Keep dependencies up to date
 - Regularly run `pnpm audit`
 - Review security advisories
 
 ### Environment Variables
+
 - Never commit `.env` files
 - Use secure key management
 - Rotate secrets regularly
 
 ### CORS Configuration
+
 - Configure CORS properly for your use case
 - Don't use `origin: '*'` in production
 - Validate origin headers
 
 ### Rate Limiting
+
 - Implement rate limiting for public APIs
 - Protect against DDoS attacks
 - Monitor unusual traffic patterns

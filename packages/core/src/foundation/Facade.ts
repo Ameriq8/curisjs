@@ -3,8 +3,6 @@
  * Provides static-like access to services in the container
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import type { Container } from './Container';
 
 let globalContainer: Container | null = null;

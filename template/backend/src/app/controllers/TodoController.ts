@@ -31,9 +31,10 @@ export class TodoController {
 
       // Convert query strings to proper types for validation
       const parsedParams = {
-        completed: queryParams.completed !== undefined
-          ? queryParams.completed === 'true' || queryParams.completed === '1'
-          : undefined,
+        completed:
+          queryParams.completed !== undefined
+            ? queryParams.completed === 'true' || queryParams.completed === '1'
+            : undefined,
         search: typeof queryParams.search === 'string' ? queryParams.search : undefined,
         limit: queryParams.limit ? Number(queryParams.limit) : undefined,
         offset: queryParams.offset ? Number(queryParams.offset) : undefined,

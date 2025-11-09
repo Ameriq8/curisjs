@@ -4,8 +4,8 @@
 
 import { ServiceProvider } from '@curisjs/core';
 import type { Application } from '@curisjs/core';
-import { ConnectionManager } from '../connection.js';
-import type { DatabaseConfig } from '../types.js';
+import { ConnectionManager } from '../connection';
+import type { DatabaseConfig } from '../types';
 
 export class DatabaseServiceProvider extends ServiceProvider {
   private config: DatabaseConfig;

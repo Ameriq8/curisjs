@@ -6,7 +6,7 @@
  * Run: bun run examples/model-crud.ts
  */
 
-import { Model, schema, createDatabase } from '../src/index.js';
+import { Model, schema, createDatabase } from '../src/index';
 
 // Initialize database
 const db = createDatabase({
@@ -16,16 +16,20 @@ const db = createDatabase({
 });
 
 // Define schema
-const userSchema = schema.define('users', {
-  id: schema.integer().primaryKey().autoIncrement(),
-  name: schema.string().length(255).notNullable(),
-  email: schema.string().length(255).unique().notNullable(),
-  age: schema.integer().nullable(),
-  active: schema.boolean().default(true).notNullable(),
-}, {
-  timestamps: true,
-  softDeletes: true,
-});
+const userSchema = schema.define(
+  'users',
+  {
+    id: schema.integer().primaryKey().autoIncrement(),
+    name: schema.string().length(255).notNullable(),
+    email: schema.string().length(255).unique().notNullable(),
+    age: schema.integer().nullable(),
+    active: schema.boolean().default(true).notNullable(),
+  },
+  {
+    timestamps: true,
+    softDeletes: true,
+  }
+);
 
 // Define model
 class User extends Model {
@@ -101,10 +105,7 @@ console.log('');
 
 // Example 5: Update
 console.log('5️⃣ Update user:');
-await User.update(
-  { where: { id: 1 } },
-  { age: 26, name: 'Alice Johnson Jr.' }
-);
+await User.update({ where: { id: 1 } }, { age: 26, name: 'Alice Johnson Jr.' });
 const updated = await User.find(1);
 console.log('Updated user:', updated);
 console.log('');
@@ -148,10 +149,7 @@ console.log('');
 
 // Example 11: Query builder
 console.log('1️⃣1️⃣ Using query builder:');
-const youngUsers = await User.query()
-  .where('age', '<', 30)
-  .orderBy('name', 'asc')
-  .get();
+const youngUsers = await User.query().where('age', '<', 30).orderBy('name', 'asc').get();
 console.log('Young users:', youngUsers);
 console.log('');
 

@@ -3,7 +3,7 @@
  */
 
 import type { Knex } from 'knex';
-import type { WhereClause } from './types.js';
+import type { WhereClause } from './types';
 
 export class QueryBuilder<T = any> {
   protected query: Knex.QueryBuilder;
@@ -122,12 +122,7 @@ export class QueryBuilder<T = any> {
   /**
    * Join table
    */
-  join(
-    table: string,
-    first: string,
-    operator?: string,
-    second?: string
-  ): this {
+  join(table: string, first: string, operator?: string, second?: string): this {
     if (second) {
       this.query.join(table, first, operator!, second);
     } else {
@@ -139,12 +134,7 @@ export class QueryBuilder<T = any> {
   /**
    * Left join table
    */
-  leftJoin(
-    table: string,
-    first: string,
-    operator?: string,
-    second?: string
-  ): this {
+  leftJoin(table: string, first: string, operator?: string, second?: string): this {
     if (second) {
       this.query.leftJoin(table, first, operator!, second);
     } else {

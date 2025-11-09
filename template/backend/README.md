@@ -100,6 +100,7 @@ GET /health
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -115,12 +116,14 @@ GET /todos?completed=false&search=buy&limit=20&offset=0
 ```
 
 **Query Parameters:**
+
 - `completed` (boolean, optional): Filter by completion status
 - `search` (string, optional): Search in title and description
 - `limit` (number, optional): Items per page (default: 20, max: 100)
 - `offset` (number, optional): Pagination offset (default: 0)
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -150,6 +153,7 @@ GET /todos/:id
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -178,11 +182,13 @@ Content-Type: application/json
 ```
 
 **Validation Rules:**
+
 - `title`: Required, 1-200 characters
 - `description`: Optional, max 1000 characters
 - `completed`: Optional, boolean (default: false)
 
 **Response (201):**
+
 ```json
 {
   "success": true,
@@ -213,6 +219,7 @@ Content-Type: application/json
 **Note:** All fields are optional in updates
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -235,6 +242,7 @@ PATCH /todos/:id/toggle
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -256,6 +264,7 @@ DELETE /todos/:id
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -300,6 +309,7 @@ Controller → Service → Repository → Database
 ```
 
 **Benefits:**
+
 - **Separation of Concerns**: Each layer has a single responsibility
 - **Testability**: Easy to mock and test each layer independently
 - **Maintainability**: Changes in one layer don't affect others
@@ -389,10 +399,10 @@ export class UserRepository {
   }
 
   create(input: CreateUserInput): User {
-    const result = db.prepare(
-      'INSERT INTO users (name, email) VALUES (?, ?)'
-    ).run(input.name, input.email);
-    
+    const result = db
+      .prepare('INSERT INTO users (name, email) VALUES (?, ?)')
+      .run(input.name, input.email);
+
     return this.findById(result.lastInsertRowid as number)!;
   }
 }
@@ -438,13 +448,16 @@ export class UserController {
 
   async create(ctx: Context): Promise<Response> {
     const result = await ctx.validate(createUserSchema);
-    
+
     if (!result.success) {
-      return json({
-        success: false,
-        error: 'Validation failed',
-        details: result.error.format()
-      }, { status: 400 });
+      return json(
+        {
+          success: false,
+          error: 'Validation failed',
+          details: result.error.format(),
+        },
+        { status: 400 }
+      );
     }
 
     const user = await this.service.create(result.data);
@@ -462,7 +475,7 @@ import { UserController } from '../app/controllers/UserController.js';
 
 export function registerUserRoutes(app: App): void {
   const controller = new UserController();
-  
+
   app.get('/users', (ctx) => controller.index(ctx));
   app.post('/users', (ctx) => controller.create(ctx));
 }
@@ -516,17 +529,19 @@ export function down(db: Database) {
 To use PostgreSQL instead of SQLite:
 
 1. Install dependencies:
+
 ```bash
 pnpm add pg
 pnpm add -D @types/pg
 ```
 
 2. Update repository to use `pg`:
+
 ```typescript
 import { Pool } from 'pg';
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
 });
 
 // Use async queries
@@ -636,7 +651,7 @@ import type { Middleware } from '@curisjs/core';
 export function auth(): Middleware {
   return async (ctx, next) => {
     const token = ctx.header('Authorization');
-    
+
     if (!token) {
       return new Response('Unauthorized', { status: 401 });
     }

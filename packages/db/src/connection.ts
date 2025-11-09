@@ -4,7 +4,7 @@
  */
 
 import knex, { type Knex } from 'knex';
-import type { ConnectionConfig, DatabaseConfig } from './types.js';
+import type { ConnectionConfig, DatabaseConfig } from './types';
 
 /**
  * Connection manager class
@@ -124,9 +124,7 @@ export class ConnectionManager {
    * Close all connections
    */
   static async closeAll(): Promise<void> {
-    const closePromises = Array.from(this.instances.values()).map((instance) =>
-      instance.destroy()
-    );
+    const closePromises = Array.from(this.instances.values()).map((instance) => instance.destroy());
     await Promise.all(closePromises);
     this.instances.clear();
   }

@@ -2,7 +2,7 @@
  * Schema Builder - Fluent API for defining database schemas
  */
 
-import type { ColumnDefinition, ColumnType, SchemaDefinition } from '../types.js';
+import type { ColumnDefinition, ColumnType, SchemaDefinition } from '../types';
 
 /**
  * Column builder for fluent schema definition

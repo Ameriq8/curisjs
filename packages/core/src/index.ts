@@ -6,9 +6,9 @@
  */
 
 // Core exports
-export { createApp, CurisApp } from './kernel.js';
-export { Router } from './router.js';
-export { ContextImpl, ValidationError } from './context.js';
+export { createApp, CurisApp } from './kernel';
+export { Router } from './router';
+export { ContextImpl, ValidationError } from './context';
 
 /**
  * Create handler for edge runtimes (Cloudflare Workers, Vercel Edge, etc.)
@@ -23,10 +23,10 @@ export { ContextImpl, ValidationError } from './context.js';
  * export default createHandler(app);
  * ```
  */
-export function createHandler(app: import('./types/index.js').App) {
+export function createHandler(app: import('./types/index').App) {
   return {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    fetch: (request: Request, env?: any) => app.fetch(request, env),
+    fetch: (request: Request, env?: import('./types/index').Environment) =>
+      app.fetch(request, env),
   };
 }
 
@@ -46,7 +46,7 @@ export {
   type ValidationIssue,
   type ValidationSuccess,
   type ValidationResult,
-} from './validation/index.js';
+} from './validation/index';
 
 // Foundation exports (Laravel-like architecture)
 export {
@@ -66,22 +66,22 @@ export {
   type ApplicationConfig,
   type EnvOptions,
   container,
-} from './foundation/index.js'; // Service Providers
+} from './foundation/index'; // Service Providers
 export {
   RouteServiceProvider,
   MiddlewareServiceProvider,
   ConfigServiceProvider,
-} from './providers/index.js';
+} from './providers/index';
 
 // Facades
-export { Route as RouteFacade, Config as ConfigFacade } from './facades/index.js';
+export { Route as RouteFacade, Config as ConfigFacade } from './facades/index';
 
 // Response utilities
-export { json, text, html, redirect, stream, sse } from './utils/response.js';
+export { json, text, html, redirect, stream, sse } from './utils/response';
 
 // Middleware
-export { cors } from './middleware/cors.js';
-export { logger } from './middleware/logger.js';
+export { cors } from './middleware/cors';
+export { logger } from './middleware/logger';
 
 // Types
 export type {
@@ -98,6 +98,6 @@ export type {
   Route,
   RouteMatch,
   RouteParams,
-} from './types/index.js';
+} from './types/index';
 
-export { MethodBitmask } from './types/index.js';
+export { MethodBitmask } from './types/index';
