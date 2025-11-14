@@ -5,7 +5,7 @@
   "description": "High-performance, multi-runtime web framework and tools",
   "type": "module",
   "scripts": {
-    "build": "pnpm --filter \"./packages/**\" build",
+    "build": "pnpm --filter @curisjs/core build && pnpm --filter @curisjs/db build && pnpm --filter @curisjs/cli build",
     "dev": "pnpm --filter \"./packages/**\" dev",
     "test": "vitest run",
     "test:watch": "vitest",

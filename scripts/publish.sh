@@ -13,9 +13,13 @@ fi
 echo "✓ Logged in as: $(npm whoami)"
 echo ""
 
-# Clean previous builds
+# Clean previous builds (but keep node_modules)
 echo "🧹 Cleaning previous builds..."
-pnpm clean
+pnpm --filter "./packages/**" run clean
+
+# Clean TypeScript build cache
+find packages -name "tsconfig.tsbuildinfo" -o -name ".tsbuildinfo" 2>/dev/null | xargs rm -f
+find packages/*/src -name "*.d.ts" -o -name "*.d.ts.map" -o -name "*.js" -o -name "*.js.map" 2>/dev/null | xargs rm -f
 
 # Build packages
 echo "📦 Building packages..."

@@ -57,8 +57,8 @@
     "prompts": "^2.4.2"
   },
   "peerDependencies": {
-    "@curisjs/core": "workspace:*",
-    "@curisjs/db": "workspace:*"
+    "@curisjs/core": "^0.1.0",
+    "@curisjs/db": "^0.1.0"
   },
   "peerDependenciesMeta": {
     "@curisjs/db": {
