@@ -50,9 +50,18 @@ importers:
       '@curisjs/db':
         specifier: workspace:*
         version: link:../db
+      commander:
+        specifier: ^14.0.2
+        version: 14.0.2
+      ora:
+        specifier: ^9.0.0
+        version: 9.0.0
       picocolors:
         specifier: ^1.0.0
         version: 1.1.1
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
     devDependencies:
       '@types/node':
         specifier: ^20.10.0
@@ -60,15 +69,6 @@ importers:
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9
-      commander:
-        specifier: ^14.0.2
-        version: 14.0.2
-      ora:
-        specifier: ^9.0.0
-        version: 9.0.0
-      prompts:
-        specifier: ^2.4.2
-        version: 2.4.2
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
