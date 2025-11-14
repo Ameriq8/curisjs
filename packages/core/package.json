@@ -1,6 +1,6 @@
 {
   "name": "@curisjs/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "High-performance, multi-runtime web framework built on Web Standards. Works with Bun, Deno, Node.js 18+, and edge runtimes.",
   "type": "module",
   "main": "./dist/index.js",

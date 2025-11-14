@@ -2,10 +2,11 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./",
+    "rootDir": "./src",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
+    "composite": true,
     "module": "ESNext",
     "target": "ES2022",
     "lib": ["ES2022", "DOM"],
@@ -15,6 +16,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*", "test/**/*"],
-  "exclude": ["node_modules", "dist", "bench"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "test", "bench"]
 }
