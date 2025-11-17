@@ -22,7 +22,7 @@ jobs:
       - name: Enable corepack & prepare pnpm
         run: |
           corepack enable
-          corepack prepare pnpm@8.8.0 --activate
+          corepack prepare pnpm@latest --activate
 
       - name: Get pnpm store directory
         shell: bash
@@ -38,7 +38,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build docs
         run: pnpm run docs:build
