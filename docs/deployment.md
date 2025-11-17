@@ -549,6 +549,6 @@ mysql -h host -u user -p
 
 ## Next Steps
 
-- [Environment Configuration](/core/configuration)
-- [Performance Optimization](/core/performance)
-- [Security Best Practices](/core/security)
+- [Environment Configuration](/core/application)
+- [Performance Optimization](/core/application)
+- [Security Best Practices](/core/middleware)

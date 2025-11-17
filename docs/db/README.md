@@ -983,7 +983,7 @@ await User.create(data);
 
 ## API Reference
 
-- [Model API](./model.md)
+- [Model API](./models.md)
 - [Query Builder API](./query-builder.md)
 - [Migrations API](./migrations.md)
 - [Relations API](./relations.md)
