@@ -82,6 +82,32 @@ export { json, text, html, redirect, stream, sse } from './utils/response';
 // Middleware
 export { cors } from './middleware/cors';
 export { logger } from './middleware/logger';
+export { helmet } from './middleware/helmet';
+export { rateLimiter } from './middleware/rate-limiter';
+export { csrf } from './middleware/csrf';
+export { sanitizer } from './middleware/sanitizer';
+export { bodyParser } from './middleware/body-parser';
+export { compression } from './middleware/compression';
+export { session } from './middleware/session';
+export { apiVersion } from './middleware/api-version';
+export { 
+  validator, 
+  validateBody, 
+  validateQuery, 
+  validateParams, 
+  validateHeaders 
+} from './middleware/validator';
+
+// Middleware Types
+export type { HelmetOptions } from './middleware/helmet';
+export type { RateLimiterOptions, RateLimitStore } from './middleware/rate-limiter';
+export type { CSRFOptions } from './middleware/csrf';
+export type { SanitizerOptions } from './middleware/sanitizer';
+export type { BodyParserOptions } from './middleware/body-parser';
+export type { CompressionOptions } from './middleware/compression';
+export type { SessionOptions, SessionStore } from './middleware/session';
+export type { APIVersionOptions } from './middleware/api-version';
+export type { ValidatorOptions } from './middleware/validator';
 
 // Types
 export type {
