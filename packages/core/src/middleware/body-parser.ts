@@ -68,21 +68,21 @@ function checkLimit(ctx: Context, limit: number): boolean {
 
 /**
  * Body parser middleware
- * 
+ *
  * @example
  * ```ts
  * import { bodyParser } from '@curisjs/core';
- * 
+ *
  * // Basic usage
  * app.use(bodyParser());
- * 
+ *
  * // With custom options
  * app.use(bodyParser({
  *   json: { limit: 2 * 1024 * 1024 }, // 2MB
  *   form: true,
  *   text: false,
  * }));
- * 
+ *
  * // Access parsed body
  * app.post('/api/users', async (ctx) => {
  *   const body = ctx.state.body;
@@ -108,7 +108,7 @@ export function bodyParser(options: BodyParserOptions = {}): Middleware {
 
   return async (ctx: Context, next: Next) => {
     const method = ctx.request.method.toUpperCase();
-    
+
     // Only parse body for methods that typically have a body
     if (!['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
       return next();

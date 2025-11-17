@@ -50,14 +50,14 @@ function isCompressible(contentType: string): boolean {
 
 /**
  * Compression middleware
- * 
+ *
  * @example
  * ```ts
  * import { compression } from '@curisjs/core';
- * 
+ *
  * // Basic usage
  * app.use(compression());
- * 
+ *
  * // With custom options
  * app.use(compression({
  *   threshold: 2048, // Only compress responses > 2KB

@@ -57,25 +57,25 @@ export interface APIVersionOptions {
 
 /**
  * API Version middleware
- * 
+ *
  * @example
  * ```ts
  * import { apiVersion } from '@curisjs/core';
- * 
+ *
  * // Header-based versioning
  * app.use(apiVersion({
  *   strategy: 'header',
  *   versions: ['1', '2', '3'],
  *   default: '1',
  * }));
- * 
+ *
  * // Path-based versioning (/v1/users, /v2/users)
  * app.use(apiVersion({
  *   strategy: 'path',
  *   prefix: '/v',
  *   versions: ['1', '2'],
  * }));
- * 
+ *
  * // Access version in route
  * app.get('/api/users', async (ctx) => {
  *   const version = ctx.state.apiVersion;

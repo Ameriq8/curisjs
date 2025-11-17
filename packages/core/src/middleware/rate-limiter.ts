@@ -114,21 +114,21 @@ class MemoryStore implements RateLimitStore {
 
 /**
  * Rate limiter middleware
- * 
+ *
  * @example
  * ```ts
  * import { rateLimiter } from '@curisjs/core';
- * 
+ *
  * // Basic usage
  * app.use(rateLimiter());
- * 
+ *
  * // Custom configuration
  * app.use(rateLimiter({
  *   max: 100,
  *   windowMs: 15 * 60 * 1000, // 15 minutes
  *   message: 'Too many requests from this IP',
  * }));
- * 
+ *
  * // Custom key generator (e.g., by user ID)
  * app.use(rateLimiter({
  *   keyGenerator: (ctx) => ctx.state.userId || 'anonymous',
@@ -143,8 +143,8 @@ export function rateLimiter(options: RateLimiterOptions = {}): Middleware {
     statusCode = 429,
     keyGenerator = (ctx: Context) => {
       const forwarded = ctx.request.headers.get('x-forwarded-for');
-      const ip = (forwarded ? forwarded.split(',')[0]?.trim() : null) || 
-                ctx.request.headers.get('x-real-ip') || 
+      const ip = (forwarded ? forwarded.split(',')[0]?.trim() : null) ||
+                ctx.request.headers.get('x-real-ip') ||
                 'unknown';
       return ip;
     },

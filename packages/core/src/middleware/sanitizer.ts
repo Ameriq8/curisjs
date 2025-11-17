@@ -126,21 +126,21 @@ function sanitizeValue(
 
 /**
  * Sanitizer middleware
- * 
+ *
  * @example
  * ```ts
  * import { sanitizer } from '@curisjs/core';
- * 
+ *
  * // Basic usage
  * app.use(sanitizer());
- * 
+ *
  * // With custom options
  * app.use(sanitizer({
  *   allowedTags: ['b', 'i', 'em', 'strong'],
  *   stripTags: true,
  *   escapeHtml: true,
  * }));
- * 
+ *
  * // Data is automatically sanitized
  * app.post('/api/posts', async (ctx) => {
  *   const body = ctx.state.body; // Already sanitized
@@ -169,7 +169,7 @@ export function sanitizer(options: SanitizerOptions = {}): Middleware {
     if (config.query) {
       const queries = ctx.queries();
       const sanitized: Record<string, string | string[]> = {};
-      
+
       for (const [key, value] of Object.entries(queries)) {
         sanitized[key] = sanitizeValue(value, config);
       }
@@ -181,7 +181,7 @@ export function sanitizer(options: SanitizerOptions = {}): Middleware {
     // Sanitize URL parameters
     if (config.params && ctx.params) {
       const sanitized: Record<string, string> = {};
-      
+
       for (const [key, value] of Object.entries(ctx.params)) {
         sanitized[key] = sanitizeValue(value, config);
       }

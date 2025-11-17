@@ -102,20 +102,20 @@ function parseCookies(cookieHeader: string): Record<string, string> {
 
 /**
  * Session middleware
- * 
+ *
  * @example
  * ```ts
  * import { session } from '@curisjs/core';
- * 
+ *
  * // Basic usage
  * app.use(session({ secret: 'your-secret-key' }));
- * 
+ *
  * // Use session data
  * app.get('/api/profile', async (ctx) => {
  *   ctx.state.session.userId = 123;
  *   // Session is automatically saved
  * });
- * 
+ *
  * app.get('/api/user', async (ctx) => {
  *   const userId = ctx.state.session.userId;
  *   // Access session data
@@ -144,7 +144,7 @@ export function session(options: SessionOptions = {}): Middleware {
     // Parse cookies
     const cookieHeader = ctx.request.headers.get('cookie');
     const cookies = cookieHeader ? parseCookies(cookieHeader) : {};
-    
+
     let sid = cookies[name];
     let sessionData: any = {};
     let isNew = false;

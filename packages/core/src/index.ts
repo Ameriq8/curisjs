@@ -90,12 +90,12 @@ export { bodyParser } from './middleware/body-parser';
 export { compression } from './middleware/compression';
 export { session } from './middleware/session';
 export { apiVersion } from './middleware/api-version';
-export { 
-  validator, 
-  validateBody, 
-  validateQuery, 
-  validateParams, 
-  validateHeaders 
+export {
+  validator,
+  validateBody,
+  validateQuery,
+  validateParams,
+  validateHeaders
 } from './middleware/validator';
 
 // Middleware Types

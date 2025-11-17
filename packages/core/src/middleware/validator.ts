@@ -45,13 +45,13 @@ async function extractData(ctx: Context, source: string): Promise<any> {
   switch (source) {
     case 'body':
       return ctx.state.body !== undefined ? ctx.state.body : await ctx.json();
-    
+
     case 'query':
       return ctx.queries();
-    
+
     case 'params':
       return ctx.params;
-    
+
     case 'headers': {
       const headers: Record<string, string> = {};
       ctx.request.headers.forEach((value, key) => {
@@ -59,7 +59,7 @@ async function extractData(ctx: Context, source: string): Promise<any> {
       });
       return headers;
     }
-    
+
     default:
       return ctx.state.body;
   }
@@ -82,27 +82,27 @@ function formatValidationError(error: SchemaValidationError) {
 
 /**
  * Validator middleware factory
- * 
+ *
  * @example
  * ```ts
  * import { validator, v } from '@curisjs/core';
- * 
+ *
  * // Define schema
  * const userSchema = v.object({
  *   name: v.string().min(2).max(50),
  *   email: v.string().email(),
  *   age: v.number().min(18).optional(),
  * });
- * 
+ *
  * // Validate request body
- * app.post('/api/users', 
+ * app.post('/api/users',
  *   validator({ schema: userSchema }),
  *   async (ctx) => {
  *     const data = ctx.state.validated; // Type-safe validated data
  *     // Create user...
  *   }
  * );
- * 
+ *
  * // Validate query parameters
  * app.get('/api/users',
  *   validator({

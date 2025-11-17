@@ -75,12 +75,12 @@ function generateToken(length: number): string {
   let token = '';
   const array = new Uint8Array(length);
   crypto.getRandomValues(array);
-  
+
   for (let i = 0; i < length; i++) {
     const char = chars[array[i]! % chars.length];
     if (char) token += char;
   }
-  
+
   return token;
 }
 
@@ -95,20 +95,20 @@ function extractToken(ctx: Context, headerName: string, _fieldName: string): str
   // Try body field (for form submissions)
   // Note: This would require parsing the body, which should be done carefully
   // For now, we'll just check the header
-  
+
   return null;
 }
 
 /**
  * CSRF protection middleware
- * 
+ *
  * @example
  * ```ts
  * import { csrf } from '@curisjs/core';
- * 
+ *
  * // Basic usage
  * app.use(csrf());
- * 
+ *
  * // With custom options
  * app.use(csrf({
  *   cookieName: 'xsrf-token',
@@ -118,7 +118,7 @@ function extractToken(ctx: Context, headerName: string, _fieldName: string): str
  *     sameSite: 'strict',
  *   }
  * }));
- * 
+ *
  * // In your forms:
  * // <input type="hidden" name="_csrf" value="${csrfToken}">
  * ```
@@ -149,7 +149,7 @@ export function csrf(options: CSRFOptions = {}): Middleware {
 
   return async (ctx: Context, next: Next) => {
     const method = ctx.request.method.toUpperCase();
-    
+
     // Check if this request should be protected
     const protect = shouldProtect ? shouldProtect(ctx) : !safeMethods.includes(method);
 

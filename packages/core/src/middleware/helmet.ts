@@ -107,13 +107,13 @@ const DEFAULT_OPTIONS: Required<HelmetOptions> = {
 
 /**
  * Helmet middleware for setting security headers
- * 
+ *
  * @example
  * ```ts
  * import { helmet } from '@curisjs/core';
- * 
+ *
  * app.use(helmet());
- * 
+ *
  * // With custom options
  * app.use(helmet({
  *   contentSecurityPolicy: {
@@ -143,19 +143,19 @@ export function helmet(options: HelmetOptions = {}): Middleware {
         const policy = Object.entries(directives)
           .map(([key, values]) => `${key} ${values.join(' ')}`)
           .join(';');
-        
+
         const headerName = config.contentSecurityPolicy.reportOnly
           ? 'Content-Security-Policy-Report-Only'
           : 'Content-Security-Policy';
-        
+
         headers.set(headerName, policy);
       }
     }
 
     // DNS Prefetch Control
     if (config.dnsPrefetchControl) {
-      const allow = typeof config.dnsPrefetchControl === 'boolean' 
-        ? false 
+      const allow = typeof config.dnsPrefetchControl === 'boolean'
+        ? false
         : config.dnsPrefetchControl.allow ?? false;
       headers.set('X-DNS-Prefetch-Control', allow ? 'on' : 'off');
     }
@@ -192,14 +192,14 @@ export function helmet(options: HelmetOptions = {}): Middleware {
 
     // Strict-Transport-Security
     if (config.hsts) {
-      const maxAge = typeof config.hsts === 'boolean' 
-        ? 15552000 
+      const maxAge = typeof config.hsts === 'boolean'
+        ? 15552000
         : config.hsts.maxAge ?? 15552000;
-      
+
       const includeSubDomains = typeof config.hsts === 'boolean'
         ? true
         : config.hsts.includeSubDomains ?? true;
-      
+
       const preload = typeof config.hsts === 'boolean'
         ? false
         : config.hsts.preload ?? false;
@@ -207,7 +207,7 @@ export function helmet(options: HelmetOptions = {}): Middleware {
       let value = `max-age=${maxAge}`;
       if (includeSubDomains) value += '; includeSubDomains';
       if (preload) value += '; preload';
-      
+
       headers.set('Strict-Transport-Security', value);
     }
 
