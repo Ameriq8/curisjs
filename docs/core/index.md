@@ -153,9 +153,9 @@ Application
 
 ### Service Container
 
-- [**Dependency Injection**](/core/container) - IoC container
-- [**Service Providers**](/core/providers) - Application bootstrapping
-- [**Facades**](/core/facades) - Static proxy pattern
+- [**Dependency Injection**](/advanced/container) - IoC container
+- [**Service Providers**](/advanced/providers) - Application bootstrapping
+- [**Facades**](/advanced/facades) - Static proxy pattern
 
 ## Philosophy
 
@@ -240,7 +240,7 @@ export default app;
 - [**Middleware Guide**](/core/middleware) - Use built-in and custom middleware
 - [**Validation**](/core/validation) - Validate requests with schemas
 - [**Context API**](/core/context) - Work with request/response
-- [**Service Container**](/core/container) - Dependency injection patterns
+- [**Service Container**](/advanced/container) - Dependency injection patterns
 
 ## Examples
 

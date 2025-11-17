@@ -115,4 +115,4 @@ Full documentation will include:
 
 - [Service Container](/advanced/container)
 - [Application](/core/application)
-- [Configuration](/core/configuration)
+- [Configuration](/core/application)

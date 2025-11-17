@@ -761,5 +761,5 @@ See individual files for detailed API:
 - [Context](./context.md)
 - [Middleware](./middleware.md)
 - [Validation](./validation.md)
-- [Container](./container.md)
-- [Service Providers](./providers.md)
+- [Container](/advanced/container.md)
+- [Service Providers](/advanced/providers.md)
