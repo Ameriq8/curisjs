@@ -148,7 +148,7 @@ class AnalyticsEvent extends Model {
 
 ### Environment Variables
 
-```env
+```bash
 # .env
 DATABASE_URL=postgresql://user:pass@localhost:5432/myapp
 DB_HOST=localhost

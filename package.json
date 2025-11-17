@@ -15,7 +15,10 @@
     "format": "prettier --write \"**/*.{js,ts,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,ts,json,md}\"",
     "typecheck": "pnpm --filter \"./packages/**\" typecheck",
-    "curis": "node packages/cli/dist/index.js"
+    "curis": "node packages/cli/dist/index.js",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [
     "framework",
@@ -45,6 +48,7 @@
     "prettier": "^3.6.2",
     "typescript": "^5.3.3",
     "typescript-eslint": "^8.46.2",
+    "vitepress": "2.0.0-alpha.13",
     "vitest": "^4.0.6"
   },
   "engines": {
