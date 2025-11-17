@@ -13,6 +13,8 @@ import {
   compression,
   session,
   apiVersion,
+  validator,
+  validateBody,
   logger,
   cors,
   json,
