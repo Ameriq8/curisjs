@@ -1,6 +1,6 @@
 {
   "name": "@curisjs/cli",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "description": "CLI for CurisJS framework - Generate code, manage database, scaffold projects",
   "type": "module",
   "bin": {
@@ -18,7 +18,6 @@
   },
   "files": [
     "dist",
-    "../../template",
     "README.md",
     "LICENSE"
   ],
@@ -58,8 +57,8 @@
     "prompts": "^2.4.2"
   },
   "peerDependencies": {
-    "@curisjs/core": "workspace:*",
-    "@curisjs/db": "workspace:*"
+    "@curisjs/core": "^0.1.0",
+    "@curisjs/db": "^0.1.0"
   },
   "peerDependenciesMeta": {
     "@curisjs/db": {
