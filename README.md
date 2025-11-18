@@ -171,7 +171,9 @@ pnpm test
 
 ## 📖 Documentation
 
-For detailed documentation, see the [docs](./docs) directory or visit the [core package README](./packages/core/README.md).
+📚 **[Read the full documentation at https://ameriq8.github.io/curisjs/](https://ameriq8.github.io/curisjs/)**
+
+For offline access, see the [docs](./docs) directory or visit the [core package README](./packages/core/README.md).
 
 ## 🎨 Using the Template
 
@@ -259,9 +261,9 @@ Security is a top priority for CurisJS. If you discover a security vulnerability
 
 ## 💬 Community & Support
 
-- 📫 [GitHub Issues](https://github.com/Ameriq8/curisjs/issues) - Bug reports and feature requests
+- � [Documentation](https://ameriq8.github.io/curisjs/) - Comprehensive guides and API reference
+- �📫 [GitHub Issues](https://github.com/Ameriq8/curisjs/issues) - Bug reports and feature requests
 - 💡 [GitHub Discussions](https://github.com/Ameriq8/curisjs/discussions) - Questions and community discussions
-- 📖 [Documentation](./docs) - Comprehensive guides and API reference
 
 ## 🙏 Acknowledgments
 

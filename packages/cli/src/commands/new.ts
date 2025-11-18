@@ -176,11 +176,13 @@ async function createProject(targetPath: string, config: ProjectOptions) {
       }
     }
 
-    // Update scripts to use selected package manager
-    if (config.packageManager !== 'pnpm') {
-      packageJson.dependencies['@curisjs/core'] = '^0.1.0';
-      if (config.database) {
-        packageJson.dependencies['@curisjs/db'] = '^0.1.0';
+    // Replace workspace:* with actual versions for all package managers
+    // This is necessary because workspace: protocol only works in monorepos
+    if (packageJson.dependencies) {
+      for (const [pkg, version] of Object.entries(packageJson.dependencies)) {
+        if (typeof version === 'string' && version.startsWith('workspace:')) {
+          packageJson.dependencies[pkg] = '^0.1.0';
+        }
       }
     }
 
